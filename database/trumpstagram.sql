@@ -129,7 +129,17 @@ ALTER TABLE `image`
 ALTER TABLE `comment`
   ADD CONSTRAINT `FK_COMMENT_USERINFO` FOREIGN KEY (`comment_user_id`) REFERENCES `user_info` (`user_id`);
 
+--
+-- Insert data for table `account`
+--
+INSERT INTO `account` (`username`, `password`) VALUES
+('admin','123456');
 
+--
+-- Insert data for table `user_info`
+--
+INSERT INTO `user_info` (`user_id`, `username_id`,`name`,`email`) VALUES
+('123456789012','admin','ADMIN', 'trumpstagram@gmail.com');
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
