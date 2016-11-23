@@ -133,13 +133,15 @@ ALTER TABLE `comment`
 -- Insert data for table `account`
 --
 INSERT INTO `account` (`username`, `password`) VALUES
-('admin','123456');
+('admin','123456'),
+('member','123456');
 
 --
 -- Insert data for table `user_info`
 --
 INSERT INTO `user_info` (`user_id`, `username_id`,`name`,`email`) VALUES
-('123456789012','admin','ADMIN', 'trumpstagram@gmail.com');
+('123456789012','admin','ADMIN', 'trumpstagram@gmail.com'),
+('123456789000','member','MEMBER', 'member@gmail.com');
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
