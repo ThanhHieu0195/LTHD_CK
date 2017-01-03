@@ -24,10 +24,7 @@ module.exports = function (router, passport) {
                 type: 'Bearer',
                 exp: user.exp
             }
-            res.cookie('token', tokenData.token);
-            res.cookie('type', tokenData.type);
-            res.cookie('username', data.displayName);
-            // res.jsonp(tokenData);
+            res.cookie('token', tokenData.type+ ' ' +tokenData.token);
             res.redirect('/');
         });
 }
