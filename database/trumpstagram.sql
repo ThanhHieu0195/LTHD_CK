@@ -21,18 +21,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `account`
---
-
-CREATE TABLE `account` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `comment`
 --
@@ -65,7 +53,8 @@ CREATE TABLE `image` (
 
 CREATE TABLE `user_info` (
   `user_id` varchar(24) NOT NULL,
-  `username_id` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `description` varchar(100),
@@ -87,11 +76,7 @@ CREATE TABLE `like` (
 -- Indexes for dumped tables
 --
 
---
--- Indexes for table `account`
---
-ALTER TABLE `account`
-  ADD PRIMARY KEY (`username`);
+
 
 --
 -- Indexes for table `comment`
@@ -128,42 +113,30 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `FK_COMMENT_IMAGE` FOREIGN KEY (`comment_image_id`) REFERENCES `image` (`image_id`);
 
 --
--- Constraints for table `user_info`
---
-ALTER TABLE `user_info`
-  ADD CONSTRAINT `FK_USERINFO_ACCOUNT` FOREIGN KEY (`username_id`) REFERENCES `account` (`username`);
-  
---
 -- Constraints for table `image`
 --
-ALTER TABLE `image`
-  ADD CONSTRAINT `FK_IMAGE_USER` FOREIGN KEY (`image_user_id`) REFERENCES `user_info` (`user_id`);
+-- ALTER TABLE `image`
+--  ADD CONSTRAINT `FK_IMAGE_USER` FOREIGN KEY (`image_user_id`) REFERENCES `user_info` (`user_id`);
   
 --
 -- Constraints for table `comment`
 --
-ALTER TABLE `comment`
-  ADD CONSTRAINT `FK_COMMENT_USERINFO` FOREIGN KEY (`comment_user_id`) REFERENCES `user_info` (`user_id`);
+-- ALTER TABLE `comment`
+--  ADD CONSTRAINT `FK_COMMENT_USERINFO` FOREIGN KEY (`comment_user_id`) REFERENCES `user_info` (`user_id`);
 
 --
 -- Constraints for table `like`
 --
 ALTER TABLE `like`
-  ADD CONSTRAINT `FK_LIKE_IMAGE` FOREIGN KEY (`like_image_id`) REFERENCES `image` (`image_id`),
-  ADD CONSTRAINT `FK_LIKE_USERINFO` FOREIGN KEY (`like_user_id`) REFERENCES `user_info` (`user_id`);
---
--- Insert data for table `account`
---
-INSERT INTO `account` (`username`, `password`) VALUES
-('admin','123456'),
-('member','123456');
+  ADD CONSTRAINT `FK_LIKE_IMAGE` FOREIGN KEY (`like_image_id`) REFERENCES `image` (`image_id`);
+--  ADD CONSTRAINT `FK_LIKE_USERINFO` FOREIGN KEY (`like_user_id`) REFERENCES `user_info` (`user_id`);
 
 --
 -- Insert data for table `user_info`
 --
-INSERT INTO `user_info` (`user_id`, `username_id`,`name`,`email`) VALUES
-('123456789012','admin','ADMIN', 'trumpstagram@gmail.com'),
-('123456789000','member','MEMBER', 'member@gmail.com');
+INSERT INTO `user_info` (`user_id`, `username`,`password`,`name`,`email`,`description`,`avata_link`,`birth`) VALUES
+('123456789012','admin','123456','ADMIN', 'trumpstagram.lthd@gmail.com','admin','',''),
+('123456789000','member','123456','MEMBER', 'member@gmail.com','member','','');
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
