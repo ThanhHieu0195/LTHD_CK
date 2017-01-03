@@ -72,6 +72,16 @@ CREATE TABLE `user_info` (
   `avata_link` varchar(100),
   `birth` date
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `like`
+--
+
+CREATE TABLE `like` (
+  `like_image_id` varchar(24) NOT NULL,
+  `like_user_id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -102,6 +112,12 @@ ALTER TABLE `user_info`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `account`
+--
+ALTER TABLE `like`
+  ADD PRIMARY KEY (`like_image_id`,`like_user_id`);
+  
+--
 -- Constraints for dumped tables
 --
 
@@ -129,6 +145,12 @@ ALTER TABLE `image`
 ALTER TABLE `comment`
   ADD CONSTRAINT `FK_COMMENT_USERINFO` FOREIGN KEY (`comment_user_id`) REFERENCES `user_info` (`user_id`);
 
+--
+-- Constraints for table `like`
+--
+ALTER TABLE `like`
+  ADD CONSTRAINT `FK_LIKE_IMAGE` FOREIGN KEY (`like_image_id`) REFERENCES `image` (`image_id`),
+  ADD CONSTRAINT `FK_LIKE_USERINFO` FOREIGN KEY (`like_user_id`) REFERENCES `user_info` (`user_id`);
 --
 -- Insert data for table `account`
 --
