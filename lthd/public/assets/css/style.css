@@ -1,0 +1,207 @@
+body {
+    background: #f8f8f8;
+    text-align: left;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    color: #555;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+strong { font-weight: 700; }
+.red { color: #eb4141; }
+a:hover { text-decoration: none; }
+
+.register-container {
+    margin-top: 50px;
+    justify-content: center;
+}
+.abc{
+    flex-direction: column;
+}
+
+/* ----- iPhone ----- */
+
+.image {
+    text-align: right;
+}
+
+.image img { margin-right: 10px; }
+
+/* ----- Registration Form ----- */
+
+.register{
+    max-width: 400px;
+}
+
+.register form {
+    padding: 20px 50px 40px 50px;
+    background: #f8f8f8 url(../img/pattern.jpg) left top repeat;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    -moz-box-shadow: 0 1px 5px 0 rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 1px 5px 0 rgba(0,0,0,.3);
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.3);
+    text-align: center;
+}
+
+.register form h2 {
+    /*margin-bottom: 25px;*/
+    /*padding-bottom: 15px;*/
+    /*background: url(../img/pencil.png) 70px 6px no-repeat;*/
+    /*border-bottom: 2px dotted #bbb;*/
+    /*font-size: 30px;*/
+    font-weight: 400;
+    text-align: center;
+    font-family: cursive;
+
+}
+.register form h3 {
+    /*margin-top: 5px;*/
+    font-size: 15px;
+    /*border-bottom: 2px dotted #bbb;*/
+    text-align: center;
+    color: #999;
+    font-weight: 600;
+    margin: 0 40px 40px 40px;
+    line-height:20px;
+}
+#abc {
+    margin-top: 20px;
+}
+
+.register form input {
+    width: 100%;
+    height: 30px;
+    background: #fcfcfc;
+    border: 1px solid #ddd;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    color: #888;
+    font-size: 16px;
+}
+
+.register form input:focus {
+    border: 1px solid #ccc;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.register form input:-moz-placeholder { color: #aaa; }
+.register form input:-ms-input-placeholder { color: #aaa; }
+.register form input::-webkit-input-placeholder { color: #aaa; }
+
+.register form button {
+    position: relative;
+    cursor: pointer;
+    width: 60%;
+    height: 42px;
+    margin-top: 25px;
+    padding: 0;
+    background: #1527eb;
+    border-radius: 3px;
+    border: 0;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    overflow: hidden;
+    z-index: 0;
+}
+#username {
+    margin-top: 10px;
+}
+
+.seperate{
+    margin-top: 30px;
+    border-bottom: 2px dotted #bbb;
+    margin-bottom: 40px;
+}
+
+.register form button::before{
+    background-color: #db0f32;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    transition: all .5s ease;
+    opacity: 0;
+}
+.register form button:hover {
+    box-shadow: 3px 1px 15px 1px #3e0707;
+}
+.register form button:hover:before {
+    height: 100%;
+    opacity: 0.5;
+}
+
+.register form button span {
+    position: relative;
+    z-index: 1;
+}
+
+.register form button:active {
+    -moz-box-shadow:
+        0 -15px 30px 0 rgba(255,255,255,.05) inset,       
+        0 5px 8px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow:
+        0 -15px 30px 0 rgba(255,255,255,.05) inset,       
+        0 5px 8px 0 rgba(0,0,0,.1) inset;
+    box-shadow:
+        0 -15px 30px 0 rgba(255,255,255,.05) inset,       
+        0 5px 8px 0 rgba(0,0,0,.1) inset;
+}
+
+
+/* ----- Media queries ----- */
+
+@media (max-width: 1200px) {
+
+    .register form h2 { background: url(../img/pencil.png) 20px 6px no-repeat; }
+
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+    .register form h2 { background: none; }
+
+}
+
+@media (max-width: 767px) {
+
+    body { padding-left: 0; padding-right: 0; }
+
+    .logo, .links { text-align: center; }
+
+    .links { padding-bottom: 5px; }
+
+    .logo h1 { padding-left: 0; }
+
+    .links a.home { margin-left: 0; }
+
+    .links a.blog { margin-right: 0; }
+
+    .register-container { padding-left: 20px; padding-right: 20px; }
+
+    .register form h2 { background: none; }
+
+    .image img { display: none; }
+
+}
+
+@media (max-width: 480px) {
+
+    .register form button { width: 97%; }
+
+}
+
+
