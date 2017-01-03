@@ -2,7 +2,7 @@
  * Created by quang on 11/28/2016.
  */
 var BearerStrategy = require('passport-http-bearer').Strategy;
-
+var FacebookStrategy = require('passport-facebook').Strategy;
 var jwt = require('jsonwebtoken');
 var connection = require('../config/sqlConnection');
 var auth = require('./auth');
@@ -27,44 +27,22 @@ module.exports = function (passport) {
             });
         }
     ));
+    passport.use(new FacebookStrategy({
+            clientID: auth.facebookAuth.clientID,
+            clientSecret: auth.facebookAuth.clientSecret,
+            callbackURL: auth.facebookAuth.callbackURL
+        },
+        function(accessToken, refreshToken, profile, cb) {
+            return cb(null, profile);
 
-    /*
-     passport.use(new GoogleStrategy({
-     clientID: configAuth.googleAuth.consumerKey,
-     clientSecret: configAuth.googleAuth.consumerSecret,
-     callbackURL: configAuth.googleAuth.callbackURL,
-     passReqToCallback: true
-     },
-     function (req, accessToken, refreshToken, profile, done) {
-     console.log(profile);
-     var newUser = new Object();
-     newUser.facebook.id = profile.id;
-     newUser.facebook.token = accessToken;
-     newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-     newUser.facebook.email = profile.emails[0].value;
-     return done(null, newUser);
-     }));
+        }));
 
-     passport.use(new FacebookStrategy({
-     clientID: configAuth.facebookAuth.clientID,
-     clientSecret: configAuth.facebookAuth.clientSecret,
-     callbackURL: configAuth.facebookAuth.callbackURL,
-     passReqToCallback: true
-     },
-     function (req, accessToken, refreshToken, profile, done) {
-     process.nextTick( function() {
-     //user is not logged in yet
-     User.findOne({'id': profile.id}, function (err, user) {
-     var newUser = new Object();
-     newUser.id = profile.id;
-     newUser.token = accessToken;
-     newUser.name = profile.displayName;
-     newUser.email = profile.username;
 
-     req.user = newUser;
-     return done(null, newUser);
-     });
-     });
-     }));
-     */
+    passport.serializeUser(function(user, cb) {
+        cb(null, user);
+    });
+
+    passport.deserializeUser(function(obj, cb) {
+        cb(null, obj);
+    });
 }

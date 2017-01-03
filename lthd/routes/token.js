@@ -6,6 +6,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var connection = require('../config/sqlConnection');
 var auth = require('../config/auth');
+var passport = require('passport');
 
 /* GET users listing. */
 router.post('/', function (req, res, next) {
