@@ -1,31 +1,38 @@
-/**
- * Created by quang on 11/29/2016.
- */
+
 var express = require('express');
 var router = express.Router();
 var connection = require('../config/sqlConnection');
 var path = require('path');
+var shortid = require('shortid');
+var constants = require('../config/constants');
 /* GET users listing. */
 router.post('/register', function (req, res, next) {
-    var account = {username: req.body.username, email: req.body.email, password: req.body.password};
+    var account = {
+        id: shortid.generate(),
+        username: req.body.username,
+        password: req.body.password,
+        name: req.body.name,
+        description: req.body.description,
+        level:constants.LEVEL_MEMBER
+    };
 
-    /*
-     validate data
-     */
-    if (account.username == undefined || account.username.length < 8)
-        res.end({mess: 'username không hợp lệ'});
-    if (account.password == undefined || account.password.length < 8)
-        res.end({mess: 'password không hợp lệ'});
-    if (account.email == undefined || account.email.length < 5)
-        res.end({mess: 'email không hợp lệ'});
+    if ( account.username == undefined || account.username == '' || account.password == undefined || account.password == ''  ) {
+        res.status(400).end('data không hợp lệ');
+    }
 
-    connection.query('INSERT INTO account SET ?', account, function (err, result) {
+    connection.query('select count(*) num from account where username = ?', account.username, function (err, result) {
         if (err) {
-            res.status = 501;
-            res.end({mess: JSON.stringify(err.data)});
+            res.status(400).end(err.data);
         }
-        res.status = 201;
-        res.end({mess: 'register success'});
+        if ( result.num > 0 ) {
+            res.status(400).end('user đã tồn tại');
+        }
+        connection.query('insert into account set ?', account, function (err, result) {
+            if (err) {
+                res.status(400).end(error.data);
+            }
+            res.status(200).render('success', {caption:'Đăng kí thành công', img_src:'', button_link:'/', button_text:'Tiếp tục'});
+        });
     });
 
 });

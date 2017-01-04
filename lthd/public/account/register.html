@@ -32,15 +32,17 @@
                 </div>
 
                 <div class="register span6">
-                    <form action="" method="post">
+                    <form action="/register" method="post">
                         <h2>TRUMSTAGRAM</h2>
                         <h3>Sign up to see photos and videos from your friends.</h3>
                         <div class = "seperate"></div>
-                        <input type="text" id="email" name="email" placeholder="Mobile number or Email">
-                        <input type="text" id="fullname" name="fullname" placeholder="Full Name">
-                        <input type="text" id="username" name="username" placeholder="UserName">
-                        <input type="password" id="password" name="password" placeholder="Password">
-                        <button type="submit"><span>Sign Up</span></button>
+                        <input type="text" name="username" placeholder="UserName">
+                        <input type="password" name="password" placeholder="Password">
+                        <input type="text" name="name" placeholder="Name display">
+                        <input type="text" name="email" placeholder="Mobile number or Email">
+                        <input type="text" name="description" placeholder="Description">
+
+                        <button type="submit" onClick="confirm('Are you ok?')"><span>Sign Up</span></button>
                         <h3 id="abc">By signing up, you agree to our Terms & Privacy Policy.</h3>
                         <div class = "seperate"></div>
                         <h4>Have an account? <a href="#/">Login</a></h4>

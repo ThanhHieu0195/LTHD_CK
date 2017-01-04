@@ -25,6 +25,6 @@ module.exports = function (router, passport) {
                 exp: user.exp
             }
             res.cookie('token', tokenData.type+ ' ' +tokenData.token);
-            res.redirect('/');
+            res.redirect('/dashboard');
         });
 }

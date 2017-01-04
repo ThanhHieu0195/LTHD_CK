@@ -1,0 +1,40 @@
+//
+   Created by Administrator on 04/01/2017.
+h3=caption
+a(class="button",href=button_link)=button_text
+style.
+    h3 {
+        text-align: center;
+        color: #3f00ff;
+        text-transform: uppercase;
+        font-size: 40px;
+        width: 800px;
+        padding: 10px 10px;
+        left: 20%;
+        position: relative;
+        text-shadow: 2px 2px 2px;
+    }
+    a:before {
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+        left: -30px;
+        position: absolute;
+        content: '';
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZqoRucpvJMHXlY3AnJSivJLpjVAjrgyF17cel9xrI2z2NHSurDTYm5hc);
+    }
+    a:hover {
+        color: white;
+    }
+
+    a:hover:before {
+        width: 40px;
+        background-size: 40px 20px;
+        left: 0;
+        content: '';
+        background-image: url(https://cdn3.iconfinder.com/data/icons/arrows-85/24/Arrow-30-128.png);
+    }
+    a {
+        position: relative;
+        left: 48%;
+    }

@@ -32,10 +32,8 @@ myApp.controller('myControllerLogin', function($scope, $http) {
             data: {username:username, password:password},
         }).then(function successCallback(res) {
 			if (res.status == 200 ) {
-                $.cookie('token', res.data.type+ ' ' +res.data.token);
-                $scope.auto_login();
+                window.location = "/dashboard";
 			}
 		});
-		return true;
 	}
 });

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2016 at 02:49 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.5.38
+-- Generation Time: Jan 04, 2017 at 05:37 AM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.5.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -21,123 +21,40 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
---
--- Table structure for table `comment`
---
-
-CREATE TABLE `comment` (
-  `comment_id` varchar(24) NOT NULL,
-  `comment_image_id` varchar(24) NOT NULL,
-  `comment_user_id` varchar(24) NOT NULL,
-  `conntent` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
--- Table structure for table `image`
+-- Table structure for table `account`
 --
 
-CREATE TABLE `image` (
-  `image_id` varchar(24) NOT NULL,
-  `image_user_id` varchar(24) NOT NULL,
-  `image_link` varchar(100) NOT NULL,
-  `caption` varchar(100)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_info`
---
-
-CREATE TABLE `user_info` (
-  `user_id` varchar(24) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `description` varchar(100),
-  `avata_link` varchar(100),
-  `birth` date
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
--- --------------------------------------------------------
+CREATE TABLE `account` (
+  `id` varchar(24) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avata_link` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `birth` date DEFAULT NULL,
+  `level` int(11) NOT NULL COMMENT '0: admin, 1:user'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Table structure for table `like`
+-- Dumping data for table `account`
 --
 
-CREATE TABLE `like` (
-  `like_image_id` varchar(24) NOT NULL,
-  `like_user_id` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `account` (`id`, `username`, `password`, `name`, `email`, `description`, `avata_link`, `birth`, `level`) VALUES
+('123456789000', 'hieuthanh', '123', 'MEMBER', 'member@gmail.com', 'member', '', '0000-00-00', 1),
+('123456789012', 'admin', '123456', 'ADMIN', 'trumpstagram.lthd@gmail.com', 'admin', '', '0000-00-00', 0);
 
 --
 -- Indexes for dumped tables
 --
 
-
-
---
--- Indexes for table `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`comment_id`);
-
---
--- Indexes for table `image`
---
-ALTER TABLE `image`
-  ADD PRIMARY KEY (`image_id`);
-
---
--- Indexes for table `user_info`
---
-ALTER TABLE `user_info`
-  ADD PRIMARY KEY (`user_id`);
-
 --
 -- Indexes for table `account`
 --
-ALTER TABLE `like`
-  ADD PRIMARY KEY (`like_image_id`,`like_user_id`);
-  
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `comment`
---
-ALTER TABLE `comment`
-  ADD CONSTRAINT `FK_COMMENT_IMAGE` FOREIGN KEY (`comment_image_id`) REFERENCES `image` (`image_id`);
-
---
--- Constraints for table `image`
---
--- ALTER TABLE `image`
---  ADD CONSTRAINT `FK_IMAGE_USER` FOREIGN KEY (`image_user_id`) REFERENCES `user_info` (`user_id`);
-  
---
--- Constraints for table `comment`
---
--- ALTER TABLE `comment`
---  ADD CONSTRAINT `FK_COMMENT_USERINFO` FOREIGN KEY (`comment_user_id`) REFERENCES `user_info` (`user_id`);
-
---
--- Constraints for table `like`
---
-ALTER TABLE `like`
-  ADD CONSTRAINT `FK_LIKE_IMAGE` FOREIGN KEY (`like_image_id`) REFERENCES `image` (`image_id`);
---  ADD CONSTRAINT `FK_LIKE_USERINFO` FOREIGN KEY (`like_user_id`) REFERENCES `user_info` (`user_id`);
-
---
--- Insert data for table `user_info`
---
-INSERT INTO `user_info` (`user_id`, `username`,`password`,`name`,`email`,`description`,`avata_link`,`birth`) VALUES
-('123456789012','admin','123456','ADMIN', 'trumpstagram.lthd@gmail.com','admin','',''),
-('123456789000','member','123456','MEMBER', 'member@gmail.com','member','','');
-
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

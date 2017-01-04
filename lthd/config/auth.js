@@ -28,6 +28,6 @@ module.exports = {
 
     'bearerAuth' : {
         'clientSecret': 'moi_ngay_toi_chon_mot_niem_vui',
-        "tokenTTL": 60 * 60,
+        "tokenTTL": 10*60
     }
 }
