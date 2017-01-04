@@ -15,7 +15,7 @@ module.exports = function (router, passport) {
         function(req, res) {
             var data = req.session.passport.user;
             var user = new Object({
-                data: 'fb.'+data.id,
+                data: {id: 'fb.'+data.id, username: data.displayName, provider:data.provider},
                 exp: Math.floor(Date.now() / 1000) + auth.bearerAuth.tokenTTL,
             });
             var token = jwt.sign(user, auth.bearerAuth.clientSecret);
