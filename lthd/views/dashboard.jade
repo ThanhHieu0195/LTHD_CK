@@ -1,17 +1,22 @@
 doctype html
-html
+html(ng-app="myDashboard")
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
-    h1 giao dien  dashboard
-    input(class="logout" type="button" value="Logout")
-    script(src="assets/js/jquery-1.8.2.min.js")
-    script(src="assets/js/jquery-cookie.js")
-
-    script.
-      $('.logout').click(function () {
-          $.removeCookie('token');
-          window.location = "/";
-      });
+  body(ng-controller="myController")
+    .ng-view
+    input(class="logout", type="button", value="Logout", ng-click="logOut()")
+  script(src="../assets/js/jquery-1.8.2.min.js")
+  script(src="../assets/bootstrap/js/bootstrap.min.js")
+  script(src="../assets/js/jquery.backstretch.min.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js")
+  script(src="../assets/js/jquery-cookie.js")
+  script(src="https://cdn.socket.io/socket.io-1.4.5.js")
+  script(src="../js/dashboard.js")
+  script.
+//      var socket = io();
+//      socket.emit('chat message', {'sms':$('#m').val() });
+//      socket.on('HIEU', function (msg) {
+//          console.log(msg);
+//          $('#messages').append($('<li>').text(msg));
+//      });

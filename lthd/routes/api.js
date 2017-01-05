@@ -4,11 +4,19 @@
 var connection = require('../config/sqlConnection');
 var constants = require('../config/constants');
 var mysql = require('mysql');
-var jwtDecode = require('jwt-decode');
-var jwt = require('jsonwebtoken');
+var helper = require("../config/helper");
+
 module.exports = function (router, passport) {
     router.use(passport.authenticate(['bearer'], {session: false}));
-    //newfeed
+
+    router.get('/', function (req, res) {
+        var authorization = req.headers.authorization;
+        var profile = helper.decoded_token(authorization);
+        var data = {};
+        data.profile = profile;
+        res.status(200).jsonp(data);
+    });
+
     router.get('/newfeed/?:page', function (req, res) {
         var page = req.params.page;
         if (page == undefined) {
@@ -28,14 +36,9 @@ module.exports = function (router, passport) {
     });
 
     //get profile
-    router.get('/profile', function (req, res) {
+    router.get('/profile/basic', function (req, res) {
         var authorization = req.headers.authorization;
-        if ( authorization == undefined ) res.end();
-        var arr  = authorization.split(' ');
-        var token = arr[1];
-        var decoded = jwtDecode(token);
-        var now = Math.floor(Date.now() / 1000)
-        decoded['timeout'] = decoded.exp - now;
-        res.json(decoded).end();
+        var decoded = helper.decoded_token(authorization);
+        res.status(200).json(decoded);
     });
 }
