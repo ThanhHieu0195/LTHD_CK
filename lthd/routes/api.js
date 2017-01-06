@@ -5,8 +5,35 @@ var connection = require('../config/sqlConnection');
 var constants = require('../config/constants');
 var mysql = require('mysql');
 var helper = require("../config/helper");
+var cloudinary = require('cloudinary');
+
+cloudinary.config({
+    cloud_name: 'trum',
+    api_key: '997155885616554',
+    api_secret: '9mX1Yaf-D5d4Pe6sNSJQdprJaU0'
+});
 
 module.exports = function (router, passport) {
+    router.post('/image_upload', function (req, res) {
+        var myImage;
+        if (!req.files) {
+            res.send('No files were uploaded.');
+            return;
+        }
+        myImage = req.files.myImage;
+        var path = 'uploads'+myImage.name;
+        myImage.mv(path, function(err) {
+            if (err) {
+                res.status(500).send(err);
+            }
+            else {
+                cloudinary.uploader.upload(path, function(result) {
+                    console.log(result)
+                });
+            }
+        });
+    });
+
     router.use(passport.authenticate(['bearer'], {session: false}));
 
     router.get('/', function (req, res) {

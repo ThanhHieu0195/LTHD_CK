@@ -30,11 +30,11 @@ module.exports = function (passport) {
     passport.use(new FacebookStrategy({
             clientID: auth.facebookAuth.clientID,
             clientSecret: auth.facebookAuth.clientSecret,
-            callbackURL: auth.facebookAuth.callbackURL
+            callbackURL: auth.facebookAuth.callbackURL,
+            profileFields: ['id', 'displayName', 'photos', 'email']
         },
         function(accessToken, refreshToken, profile, cb) {
             return cb(null, profile);
-
         }));
 
 

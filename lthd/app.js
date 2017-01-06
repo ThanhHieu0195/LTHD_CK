@@ -5,8 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var fileUpload = require('express-fileupload');
 
 var app = express();
+
+app.use(fileUpload());
 
 require('./config/passport')(passport);
 app.use(passport.initialize());

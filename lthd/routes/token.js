@@ -21,7 +21,7 @@ router.post('/', function (req, res, next) {
         } else if (result[0].number == 0) {
             res.end('Username không tồn tại');
         } else {
-            connection.query('SELECT id, username, password  FROM account WHERE username=? and password=?', [username, password], function (err, result) {
+            connection.query('SELECT *  FROM account WHERE username=? and password=?', [username, password], function (err, result) {
                 if (err) {
                     res.end('Lỗi khi kết nối database');
                 } else if (result.length === 0) {

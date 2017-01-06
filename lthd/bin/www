@@ -88,19 +88,13 @@ function onListening() {
 /**
  * Event listener for HTTP server "listening" event.
  */
-// var io = require('socket.io')(server);
-//
-// io.on('connection', function(socket){
-//     socket.on('chat message', function(msg){
-//         io.emit('HIEU', msg.sms);
-//     });
-// });
-
-// io.on('connection', function(socket){
-//     socket.on('chat message', function(data){
-//         var from = data.from;
-//         var to= data.to;
-//         var msg = data.msg;
-//         io.emit('msg', data);
-//     });
-// });
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+    console.log('a user connect');
+    socket.on('notification', function(data){
+        var sender = data.sender;
+        var receiver = data.receiver;
+        var content = data.content;
+        io.emit( receiver, content);
+    });
+});

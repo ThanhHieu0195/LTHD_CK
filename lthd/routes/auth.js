@@ -13,9 +13,16 @@ module.exports = function (router, passport) {
     router.get('/facebook/return',
         passport.authenticate('facebook', {failureRedirect: '/' }),
         function(req, res) {
-            var data = req.session.passport.user;
+            var fbdata = req.session.passport.user;
+            var data = {};
+            // custom data
+            data.id = 'fb.'+fbdata.id;
+            data.username = fbdata.displayName;
+            data.avata_link = fbdata.photos[0].value;
+            data.provider = fbdata.provider;
+
             var user = new Object({
-                data: {id: 'fb.'+data.id, username: data.displayName, provider:data.provider},
+                data: data,
                 exp: Math.floor(Date.now() / 1000) + auth.bearerAuth.tokenTTL,
             });
             var token = jwt.sign(user, auth.bearerAuth.clientSecret);
