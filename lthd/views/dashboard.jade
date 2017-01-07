@@ -1,15 +1,123 @@
 doctype html
-html(ng-app="myDashboard")
+html(lang='en', ng-app="myDashboard")
   head
-    title= title
+    meta(http-equiv='content-type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='This is social network html5 template available in themeforest......')
+    meta(name='keywords', content='Social Network, Social Media, Make Friends, Newsfeed, Profile Page')
+    meta(name='robots', content='index, follow')
+    title News Feed | Check what your friends are doing
+    //
+      Stylesheets
+      =================================================
+    link(rel='stylesheet', href='../libs/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/style.css')
+    link(rel='stylesheet', href='css/ionicons.min.css')
+    link(rel='stylesheet', href='css/font-awesome.min.css')
+    link(href='css/emoji.css', rel='stylesheet')
+    // Google Webfont
+    link(href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700', rel='stylesheet', type='text/css')
+    // Favicon
+    link(rel='shortcut icon', type='image/png', href='images/fav.png')
   body(ng-controller="myController")
+    //
+      Header
+      =================================================
+    header#header
+      nav.navbar.navbar-default.navbar-fixed-top.menu
+        .container
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='index.html')
+              img(src='images/logo-trump.png', alt='logo')
+          // Collect the nav links, forms, and other content for toggling
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right.main-menu
+              li.dropdown
+                a(href='#/newsfeed') Home
+              li.dropdown
+                a(href='#/newsfeed') Newsfeed
+              li.dropdown
+                a(href='#/contact') Contact
+              li.dropdown
+                a(href="javascript:void(0", ng-click="logOut()") Logout
+            form.navbar-form.navbar-left.hidden-sm
+              .form-group
+                i.icon.ion-android-search
+                input.form-control(type='text', placeholder='Search friends, photos, videos')
+          // /.navbar-collapse
+        // /.container
+    // Header End
     .ng-view
-    input(class="logout", type="button", value="Logout", ng-click="logOut()")
-  script(src="../assets/js/jquery-1.8.2.min.js")
-  script(src="../assets/bootstrap/js/bootstrap.min.js")
-  script(src="../assets/js/jquery.backstretch.min.js")
-  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js")
-  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js")
-  script(src="../assets/js/jquery-cookie.js")
-  script(src="https://cdn.socket.io/socket.io-1.4.5.js")
-  script(src="../js/dashboard.js")
+    footer#footer
+      .container
+        .row
+          .footer-wrapper
+            .col-md-3.col-sm-3
+              a(href='')
+                img.footer-logo(src='images/logo-trump.png', alt='', style="background-color:black")
+              ul.list-inline.social-icons
+                li
+                  a(href='#')
+                    i.icon.ion-social-facebook
+                li
+                  a(href='#')
+                    i.icon.ion-social-twitter
+                li
+                  a(href='#')
+                    i.icon.ion-social-googleplus
+                li
+                  a(href='#')
+                    i.icon.ion-social-pinterest
+                li
+                  a(href='#')
+                    i.icon.ion-social-linkedin
+            .col-md-2.col-sm-2
+              h6 About
+              ul.footer-links
+                li
+                  a(href='') About us
+                li
+                  a(href='') Contact us
+                li
+                  a(href='') Privacy Policy
+                li
+                  a(href='') Terms
+                li
+                  a(href='') Help
+            .col-md-3.col-sm-3
+              h6 Contact Us
+              ul.contact
+                li
+                  i.icon.ion-ios-telephone-outline
+                  | +1 (234) 222 0754
+                li
+                  i.icon.ion-ios-email-outline
+                  | info@thunder-team.com
+                li
+                  i.icon.ion-ios-location-outline
+                  | 228 Park Ave S NY, USA
+      .copyright
+        p Thunder Team © 2016. All rights reserved
+    // preloader
+    #spinner-wrapper
+      .spinner
+    //
+      Scripts
+      =================================================
+    script(src='../libs/js/jquery.min.js')
+    script(src='../libs/bootstrap/js/bootstrap.min.js')
+    script(src='../libs/js/jquery.sticky-kit.min.js')
+    script(src='../libs/js/jquery.scrollbar.min.js')
+    script(src='js/script.js')
+    script(src='js/noti.js')
+    script(src="../libs/js/angular.min.js")
+    script(src="../libs/js/angular-route.js")
+    script(src="../libs/js/jquery-cookie.js")
+    script(src="../libs/js/socket.io.js")
+    script(src="../js/dashboard.js")

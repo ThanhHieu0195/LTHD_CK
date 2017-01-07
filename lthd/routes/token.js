@@ -15,17 +15,17 @@ router.post('/', function (req, res, next) {
     if (username === undefined || password === undefined) {
         res.end('Không tìm thấy tham số username & password');
     }
-    connection.query('SELECT COUNT(*) as number FROM account where username=?', username, function (err, result) {
+    connection.query('SELECT COUNT(*) as number FROM tr_account where username=?', username, function (err, result) {
         if (err) {
-            res.end('Lỗi khi kết nối database');
+            res.status(400).end('Lỗi khi kết nối database');
         } else if (result[0].number == 0) {
-            res.end('Username không tồn tại');
+            res.status(400).end('Username không tồn tại');
         } else {
-            connection.query('SELECT *  FROM account WHERE username=? and password=?', [username, password], function (err, result) {
+            connection.query('SELECT *  FROM tr_account WHERE username=? and password=?', [username, password], function (err, result) {
                 if (err) {
-                    res.end('Lỗi khi kết nối database');
+                    res.status(400).end('Lỗi khi kết nối database');
                 } else if (result.length === 0) {
-                    res.end('Sai mật khẩu');
+                    res.status(400).end('Sai mật khẩu');
                 } else {
                     var account = new Object({
                         data: result[0],
@@ -38,6 +38,7 @@ router.post('/', function (req, res, next) {
                         exp: account.exp
                     }
                     res.cookie('token', tokenData.type+ ' ' +tokenData.token);
+                    console.log(tokenData);
                     res.redirect('/');
                 }
             });

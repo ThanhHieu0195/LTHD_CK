@@ -31,9 +31,9 @@ myApp.controller('myControllerLogin', function($scope, $http) {
             url: 'http://localhost:3000/token',
             data: {username:username, password:password},
         }).then(function successCallback(res) {
-			if (res.status == 200 ) {
                 window.location = "/dashboard";
-			}
-		});
+		},function errorCallback(res) {
+            alert(res.data);
+        });
 	}
 });

@@ -9,8 +9,6 @@ var fileUpload = require('express-fileupload');
 
 var app = express();
 
-app.use(fileUpload());
-
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -45,6 +43,12 @@ app.use('/token', token);
 
 var account = require('./routes/account');
 app.use('/', account);
+
+//bat buoc kem theo request file
+app.use(fileUpload());
+var upload = require('./routes/upload');
+app.use('/upload', upload);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

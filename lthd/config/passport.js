@@ -16,7 +16,7 @@ module.exports = function (passport) {
                 if (decoded === undefined) {
                     return done(null, null); //Token over time
                 } else {
-                    connection.query('SELECT COUNT(*) FROM account WHERE username=? and password=?', [decoded.data.username, decoded.data.password], function (err, result) {
+                    connection.query('SELECT COUNT(*) FROM tr_account WHERE username=? and password=?', [decoded.data.username, decoded.data.password], function (err, result) {
                         if (err || result === undefined) {
                             return done(null, null);
                         } else {

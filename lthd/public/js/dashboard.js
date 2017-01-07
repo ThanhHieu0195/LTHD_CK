@@ -10,15 +10,16 @@ myApp.run(function($http) {
 myApp.config(function($routeProvider) {
     $routeProvider
         .when("/", {
-            templateUrl : "new_feed.html"
+            templateUrl : "newsfeed.html"
         })
         .when("/register", {
-            templateUrl : "new_feed.html"
+            templateUrl : "newsfeed.html"
         })
         .otherwise({
-            templateUrl : "new_feed.html"
+            templateUrl : "reset_url.html"
         });
 });
+
 myApp.controller('myController', function($scope, $http) {
     $scope.logOut = function () {
         $.removeCookie('token', { path: '/' });
@@ -26,18 +27,20 @@ myApp.controller('myController', function($scope, $http) {
     };
     //
     $http.get(link_api).then(function successCallback(res){
-        var profile = res.data.profile;
-        console.log(profile);
-        alert('Xin chào ' + profile.data.username);
+        $scope.profile = res.data.profile;
+        console.log($scope.profile);
+        // alert('Xin chào ' + profile.data.username);
 
-         //bắt sự kiện khi có thông báo
-         socket.on(profile.data.id, function (msg) {
+        //Load notification
+
+         //nhận thông báo
+         socket.on($scope.profile.data.id, function (msg) {
              console.log(msg);
          });
          //gửi thông báo
          $scope.notification = function (sender, receiver, content) {
              if (sender == "") {
-                 sender = profile.data.id;
+                 sender = $scope.profile.data.id;
              }
              data_notification = {
                  sender:sender,
@@ -48,6 +51,36 @@ myApp.controller('myController', function($scope, $http) {
          };
     },
     function errorCallback( res ) {
-        $.logOut();
+        alert('time out');
+        $scope.logOut();
     });
+});
+
+myApp.controller('myNewFeed', function($scope, $http){
+    //Load data new feed
+    var link_newfeed = link_api+'newfeed/1';
+    $http.get(link_newfeed).then(function successCallback(res) {
+        console.log(res);
+    });
+    //load num posted
+    var link_num_posted = link_api+'newfeed/totalpost';
+    $http.get(link_num_posted).then(function successCallback(res) {
+        $scope.num_posted = res.data;
+    });
+    //load commentd
+    var link_num_commented = link_api+'comment/totalpost';
+    $http.get(link_num_commented).then(function successCallback(res) {
+        $scope.num_commented = res.data;
+    });
+//    load new photo
+    var link_new_photos = link_api+'newfeed/photos/1';
+    $http.get(link_new_photos).then(function successCallback(res) {
+        $scope.new_photos = res.data;
+    });
+
+    $scope.show_notification = function () {
+        $("#notificationContainer").fadeToggle(300);
+        $("#notification_count").fadeOut("slow");
+        return false;
+    };
 });
