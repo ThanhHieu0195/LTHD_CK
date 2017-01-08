@@ -16,13 +16,39 @@ module.exports = {
         page -= 1;
         var limit = constants.LIMIT_POST;
         var offset = page*limit;
-        var sql = 'select * from ?? order by ?? limit ? offset ?;';
+        var select = 'select tr_post.*, tr_account.username poster, tr_account.avata_link avt_poster ';
+        var from = 'from ?? left join  tr_account on tr_account.id = post_by ';
+        var order = 'order by ?? limit ? offset ?;';
+        var sql = select + from + order;
         sql = mysql.format( sql,  ['tr_post', 'date_post', limit, offset]);
         console.log(sql);
-        connection.query(sql, function(err, rows, fields) {
-            if (err) throw err;
-            res.json(rows);
-        });
+        var query = connection.query(sql);
+        var data = [];
+        var arr_id = [];
+        var data_comment = [];
+
+        query
+            .on('result', function (row) {
+                data.push(row);
+                arr_id.push(row.id);
+            })
+            .on('end', function () {
+                // res.json(data);
+                var query_comment = connection.query('select tr_comment.*, tr_account.username commenter, tr_account.avata_link avt_commenter from tr_comment left join  tr_account on tr_account.id = comment_by ' +
+                    'where post_id in ('+arr_id.toString()+') group by post_id, id');
+                console.log(query_comment.sql);
+                query_comment
+                    .on('result', function (row) {
+                        if (data_comment[row.post_id] == undefined) {
+                            data_comment[row.post_id] = [];
+                        }
+                        data_comment[row.post_id].push(row);
+                    })
+                    .on('end', function () {
+                        res.json({data:data, data_comment:data_comment});
+                    });
+            });
+
     },
     totalpost: function (req, res) {
         var authorization = req.headers.authorization;
@@ -54,7 +80,7 @@ module.exports = {
                 console.log(sql);
                 var data = [];
                 for(var i=0; i<rows.length; i++) {
-                    data.push( helper.cloundinary.getUrl(rows[i].image) );
+                    data.push( rows[i].image );
                 }
                 res.status(200).json(data);
             });

@@ -36,5 +36,24 @@ module.exports = {
                 res.status(200).render('success', {caption:'Đăng kí thành công', img_src:'', button_link:'/', button_text:'Tiếp tục'});
             });
         });
+    },
+    facebook:{
+        sign:function (data) {
+            var id = data.id;
+            var iaccount = {id:data.id, username:data.username, password:'', name:data.username,
+                email:'', description:'', avata_link:data.avata_link, birth:'', level:constants.LEVEL_MEMBER};
+            sql = "select count(*) num from tr_account where id = ?";
+            connection.query(sql, id, function (err, result) {
+                console.log('insert');
+                console.log(result[0].num);
+                if ( result[0].num == 0 ) {
+                    sql = 'insert into tr_account set ?';
+                    connection.query(sql, iaccount, function (err, result) {
+                        
+                    });
+                } else {
+                }
+            });
+        }
     }
 };

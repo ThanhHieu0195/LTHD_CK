@@ -60,7 +60,9 @@ myApp.controller('myNewFeed', function($scope, $http){
     //Load data new feed
     var link_newfeed = link_api+'newfeed/1';
     $http.get(link_newfeed).then(function successCallback(res) {
-        console.log(res);
+        $scope.list_newsfeed = res.data.data;
+        $scope.list_comment = res.data.data_comment;
+        console.log(res.data);
     });
     //load num posted
     var link_num_posted = link_api+'newfeed/totalpost';

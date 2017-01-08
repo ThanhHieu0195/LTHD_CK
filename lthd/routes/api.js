@@ -29,6 +29,12 @@ module.exports = function (router, passport) {
         newfeed.getNewData(req, res);
     });
 
+    router.get('/newfeed/comment/:post_id', function (req, res) {
+        var comment = require("../models/comment");
+        var post_id = req.params.post_id;
+        comment.getCommentByPostId(post_id, res);
+    });
+
     router.get('/newfeed/photos/:page', function (req, res) {
         var newfeed = require("../models/post");
         newfeed.photos(req, res);

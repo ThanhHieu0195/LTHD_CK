@@ -66,14 +66,14 @@
 
         <!-- Post Content
         ================================================= -->
-        <div class="post-content">
-          <img src="images/post-images/1.jpg" alt="post-image" class="img-responsive post-image" />
+        <div class="post-content" ng-repeat="feed in list_newsfeed">
+          <img ng-src="{{feed.image}}" alt="post-image" class="img-responsive post-image" />
           <div class="post-container">
-            <img src="images/users/user-5.jpg" alt="user" class="profile-photo-md pull-left" />
+            <img ng-src="{{feed.avt_poster}}" alt="user" class="profile-photo-md pull-left" />
             <div class="post-detail">
               <div class="user-info">
-                <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
-                <p class="text-muted">Published a photo about 3 mins ago</p>
+                <h5><a href="timeline.html" class="profile-link">{{feed.poster}}</a> <span class="following">following</span></h5>
+                <p class="text-muted">Published a photo: {{feed.date_post}}</p>
               </div>
               <div class="reaction">
                 <a class="btn btn-like text-green"><i class="icon ion-thumbsup" alt="Like"></i> 13</a>
@@ -81,55 +81,22 @@
               </div>
               <div class="line-divider"></div>
               <div class="post-text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                <p>{{feed.describe}}</p>
               </div>
               <div class="line-divider"></div>
-              <div class="post-comment">
-                <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+              <div class="post-comment" ng-repeat="comment in list_comment[feed.id]">
+                <img ng-src="{{comment.avt_commenter}}" alt="" class="profile-photo-sm" />
+                <p><a href="timeline.html" class="profile-link">{{comment.commenter}} </a><i class="em em-laughing"></i> {{comment.content}} </p>
               </div>
+
               <div class="post-comment">
-                <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-              </div>
-              <div class="post-comment">
-                <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
+                <img ng-src="{{profile.data.avata_link}}" alt="" class="profile-photo-sm" />
                 <input type="text" class="form-control" placeholder="Post a comment">
               </div>
             </div>
           </div>
         </div>
         <!-- Post Content
-        ================================================= -->
-        <div class="post-content">
-          <img src="images/post-images/11.jpg" alt="" class="img-responsive post-image" />
-          <div class="post-container">
-            <img src="images/users/user-9.jpg" alt="user" class="profile-photo-md pull-left" />
-            <div class="post-detail">
-              <div class="user-info">
-                <h5><a href="timeline.html" class="profile-link">Anna Young</a> <span class="following">following</span></h5>
-                <p class="text-muted">Published a photo about 4 hour ago</p>
-              </div>
-              <div class="reaction">
-                <a class="btn text-green"><i class="icon ion-thumbsup"></i> 2</a>
-                <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-              </div>
-              <div class="line-divider"></div>
-              <div class="post-text">
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-              </div>
-              <div class="line-divider"></div>
-              <div class="post-comment">
-                <img src="images/users/user-10.jpg" alt="" class="profile-photo-sm" />
-                <p><a href="timeline.html" class="profile-link">Julia </a>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-              </div>
-              <div class="post-comment">
-                <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                <input type="text" class="form-control" placeholder="Post a comment">
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

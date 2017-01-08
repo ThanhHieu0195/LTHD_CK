@@ -4,7 +4,7 @@
 var jwt = require('jsonwebtoken');
 var connection = require('../config/sqlConnection');
 var auth = require('../config/auth');
-
+var account = require('../models/account');
 module.exports = function (router, passport) {
 
     router.get('/facebook',
@@ -32,6 +32,7 @@ module.exports = function (router, passport) {
                 exp: user.exp
             }
             res.cookie('token', tokenData.type+ ' ' +tokenData.token);
+            account.facebook.sign(data);
             res.redirect('/dashboard');
         });
 }
