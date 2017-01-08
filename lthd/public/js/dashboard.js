@@ -103,6 +103,9 @@ myApp.controller('myNewFeed', function($scope, $http){
                     id:res.data.id,
                     post_id:res.data.post_id
                 };
+                if ($scope.list_comment[post_id] == undefined) {
+                    $scope.list_comment[post_id] = [];
+                }
                 $scope.list_comment[post_id].push(obj_comment);
                 $scope.notification($scope.profile.data.id, obj.post_by, content);
             });
@@ -120,6 +123,7 @@ myApp.controller('myNewFeed', function($scope, $http){
         if (myImage!='' && describe != '') {
             fp.append('myImage', myImage);
             fp.append('describe', describe);
+            preloader.fadeIn();
             $http({
                 url: url,
                 method: 'POST',
