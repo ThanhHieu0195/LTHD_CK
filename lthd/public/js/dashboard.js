@@ -37,6 +37,8 @@ myApp.controller('myController', function($scope, $http) {
          socket.on($scope.profile.data.id, function (msg) {
              console.log(msg);
          });
+
+
          //gửi thông báo
          $scope.notification = function (sender, receiver, content) {
              if (sender == "") {
@@ -49,6 +51,10 @@ myApp.controller('myController', function($scope, $http) {
              }
              socket.emit( 'notification', data_notification);
          };
+
+            $scope.update_comment = function (obj_comment) {
+                socket.emit( 'update_comment', obj_comment);
+            };
     },
     function errorCallback( res ) {
         alert('time out');
@@ -57,6 +63,24 @@ myApp.controller('myController', function($scope, $http) {
 });
 
 myApp.controller('myNewFeed', function($scope, $http){
+    socket.on('update_comment', function (obj) {
+        console.log(obj);
+        var post_id = obj.post_id;
+        if ($scope.list_comment[post_id] == undefined) {
+            $scope.list_comment[post_id] = [];
+        }
+        var is_isset = false;
+        console.log($scope.list_comment[post_id]);
+        for (var i=0; i<$scope.list_comment[post_id].length; i++) {
+            if (obj.id == $scope.list_comment[post_id][i].id) {
+                is_isset = true;
+            }
+        }
+        if (is_isset == false) {
+            $scope.list_comment[post_id].push(obj);
+        }
+    });
+
     //Load data new feed
     var link_newfeed = link_api+'newfeed/1';
     $scope.myImage = '';
@@ -94,20 +118,21 @@ myApp.controller('myNewFeed', function($scope, $http){
         var data = {post_id:post_id, content:content};
         if (key == 13) {
             $http.post(link_push_comment, data).then(function successCallback(res) {
+                var data = res.data[0];
                 var obj_comment = {
                     avt_commenter:$scope.profile.data.avata_link,
                     comment_by:$scope.profile.data.id,
                     commenter:$scope.profile.data.username,
                     content:content,
-                    date_comment:res.data.date_comment,
-                    id:res.data.id,
-                    post_id:res.data.post_id
+                    date_comment:data.date_comment,
+                    id:data.id,
+                    post_id:data.post_id
                 };
                 if ($scope.list_comment[post_id] == undefined) {
                     $scope.list_comment[post_id] = [];
                 }
                 $scope.list_comment[post_id].push(obj_comment);
-                $scope.notification($scope.profile.data.id, obj.post_by, content);
+                $scope.update_comment(obj_comment);
             });
         }
     };
@@ -138,4 +163,5 @@ myApp.controller('myNewFeed', function($scope, $http){
             alert('Thông tin rỗng');
         }
     }
+
 });
