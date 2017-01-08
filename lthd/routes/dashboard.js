@@ -14,4 +14,5 @@ module.exports = function (router, passport) {
         res.render('message', {title:'Message', receiver:receiver});
     });
 
+
 }

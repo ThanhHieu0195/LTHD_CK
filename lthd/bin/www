@@ -92,6 +92,7 @@ var io = require('socket.io')(server);
 io.on('connection', function(socket){
     console.log('a user connect');
     socket.on('notification', function(data){
+        console.log(data);
         var sender = data.sender;
         var receiver = data.receiver;
         var content = data.content;

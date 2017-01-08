@@ -11,14 +11,17 @@ module.exports = function (router, passport) {
     router.get('/', function (req, res) {
         var authorization = req.headers.authorization;
         var profile = helper.decoded_token(authorization);
-        if (profile.data.provider == undefined)
-            profile.data.avata_link = helper.cloundinary.getUrl(profile.data.avata_link);
         var data = {};
         data.profile = profile;
         res.status(200).jsonp(data);
     });
 
     // newfeed
+    router.post('/newfeed/', function (req, res) {
+        var newfeed = require("../models/post");
+        newfeed.insert(req, res);
+    });
+
     router.get('/newfeed/totalpost/', function (req, res) {
         var newfeed = require("../models/post");
         newfeed.totalpost(req, res);

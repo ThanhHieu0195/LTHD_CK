@@ -46,8 +46,9 @@ app.use('/', account);
 
 //bat buoc kem theo request file
 app.use(fileUpload());
-var upload = require('./routes/upload');
-app.use('/upload', upload);
+var upload_image = express.Router();
+require('./routes/upload')(upload_image,passport);
+app.use('/upload', upload_image);
 
 
 // catch 404 and forward to error handler

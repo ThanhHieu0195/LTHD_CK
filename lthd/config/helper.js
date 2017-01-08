@@ -59,7 +59,10 @@ module.exports = {
                 }
                 else {
                     cloudinary.uploader.upload(path, function(result) {
-                        res.json(result).end();
+                        var post = require("../models/post");
+                        req.body.image = result.url;
+                        console.log(req.body)
+                        post.insert(req, res);
                     });
                 }
             });

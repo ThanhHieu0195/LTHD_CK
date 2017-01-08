@@ -59,6 +59,7 @@ myApp.controller('myController', function($scope, $http) {
 myApp.controller('myNewFeed', function($scope, $http){
     //Load data new feed
     var link_newfeed = link_api+'newfeed/1';
+    $scope.myImage = '';
     $http.get(link_newfeed).then(function successCallback(res) {
         $scope.list_newsfeed = res.data.data;
         $scope.list_comment = res.data.data_comment;
@@ -85,4 +86,52 @@ myApp.controller('myNewFeed', function($scope, $http){
         $("#notification_count").fadeOut("slow");
         return false;
     };
+
+    $scope.push_comment = function (key, obj, content) {
+        var post_id = obj.id;
+        var content = content;
+        var link_push_comment = link_api+'comment';
+        var data = {post_id:post_id, content:content};
+        if (key == 13) {
+            $http.post(link_push_comment, data).then(function successCallback(res) {
+                var obj_comment = {
+                    avt_commenter:$scope.profile.data.avata_link,
+                    comment_by:$scope.profile.data.id,
+                    commenter:$scope.profile.data.username,
+                    content:content,
+                    date_comment:res.data.date_comment,
+                    id:res.data.id,
+                    post_id:res.data.post_id
+                };
+                $scope.list_comment[post_id].push(obj_comment);
+                $scope.notification($scope.profile.data.id, obj.post_by, content);
+            });
+        }
+    };
+    $scope.fileSelected = function (element) {
+        $scope.myImage = element.files[0];
+    };
+    $scope.push_post = function (describe) {
+        var url = 'http://localhost:3000/upload/image_upload';
+        var describe = describe;
+        var myImage = $scope.myImage;
+        var fp = new FormData();
+
+        if (myImage!='' && describe != '') {
+            fp.append('myImage', myImage);
+            fp.append('describe', describe);
+            $http({
+                url: url,
+                method: 'POST',
+                data: fp,
+                headers: { 'Content-Type': undefined},
+                transformRequest: angular.identity
+            }).then(function successCallback(res) {
+                console.log(res);
+                window.location = "http://localhost:3000/dashboard/";
+            });
+        } else {
+            alert('Thông tin rỗng');
+        }
+    }
 });

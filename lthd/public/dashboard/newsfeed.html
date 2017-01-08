@@ -46,27 +46,30 @@
             <div class="col-md-7 col-sm-7">
               <div class="form-group">
                 <img ng-src="{{profile.data.avata_link}}" alt="" class="profile-photo-md">
-                <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                <textarea name="texts" ng-model="content_post" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
               </div>
             </div>
             <div class="col-md-5 col-sm-5">
               <div class="tools">
                 <ul class="publishing-tools list-inline">
+                  <li>
+                    <label class="ion-images">
+                      <input type="file" onchange="angular.element(this).scope().fileSelected(this)" style="display: none;">
+                    </label>
+                  </li>
                   <li><a href="#"><i class="ion-compose"></i></a></li>
-                  <li><a href="#"><i class="ion-images"></i></a></li>
                   <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
                   <li><a href="#"><i class="ion-map"></i></a></li>
                 </ul>
-                <button class="btn btn-primary pull-right">Publish</button>
+                <button class="btn btn-primary pull-right" ng-click="push_post(content_post)">Publish</button>
               </div>
             </div>
           </div>
+
         </div>
-
-
         <!-- Post Content
         ================================================= -->
-        <div class="post-content" ng-repeat="feed in list_newsfeed">
+        <div class="post-content" ng-repeat="feed in list_newsfeed ">
           <img ng-src="{{feed.image}}" alt="post-image" class="img-responsive post-image" />
           <div class="post-container">
             <img ng-src="{{feed.avt_poster}}" alt="user" class="profile-photo-md pull-left" />
@@ -91,12 +94,12 @@
 
               <div class="post-comment">
                 <img ng-src="{{profile.data.avata_link}}" alt="" class="profile-photo-sm" />
-                <input type="text" class="form-control" placeholder="Post a comment">
+                <input type="text" class="form-control" ng-model="comment_content" placeholder="Post a comment" post_id="{{feed.id}}" ng-keyup="push_comment($event.keyCode, $parent.list_newsfeed[$index], comment_content)">
               </div>
             </div>
           </div>
         </div>
-        <!-- Post Content
+        <!-- Post Content -->
       </div>
     </div>
   </div>

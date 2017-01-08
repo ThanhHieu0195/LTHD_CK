@@ -6,4 +6,8 @@ module.exports = function (router, passport) {
     router.post('/image_upload', function (req, res) {
         helper.cloundinary.upload(req, res);
     });
+
+    router.get('/image_upload', function (req, res) {
+        res.end('not process');
+    });
 }
