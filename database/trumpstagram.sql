@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2017 at 05:54 PM
+-- Generation Time: Jan 08, 2017 at 09:57 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -33,7 +33,7 @@ CREATE TABLE `tr_account` (
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `avata_link` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avata_link` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `birth` date DEFAULT NULL,
   `level` int(11) NOT NULL COMMENT '0: admin, 1:user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -43,9 +43,8 @@ CREATE TABLE `tr_account` (
 --
 
 INSERT INTO `tr_account` (`id`, `username`, `password`, `name`, `email`, `description`, `avata_link`, `birth`, `level`) VALUES
-('123456789000', 'hieuthanh', '123', 'MEMBER', 'member@gmail.com', 'member', '', '0000-00-00', 1),
-('123456789012', 'admin', '123456', 'ADMIN', 'trumpstagram.lthd@gmail.com', 'admin', '', '0000-00-00', 0),
-('HyXXn7Trx', 'hieuthanh12', '123', '', '', '', NULL, NULL, 1);
+('fb.856641977805897', 'Hi?u Thanh', '', 'Hi?u Thanh', '', '', 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/15873237_863333280470100_194497653299636377_n.jpg?oh=fd8b213b654f289ed02fa1b44426b2db&oe=58E6CF8B', '0000-00-00', 1),
+('S16Mls0Bx', 'hieuthanh', '123', 'Hi?u Thanh', '', 'asdasd', 'user.png', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -67,7 +66,7 @@ CREATE TABLE `tr_comment` (
 
 INSERT INTO `tr_comment` (`id`, `post_id`, `comment_by`, `date_comment`, `content`) VALUES
 (15, 1, 'fb.856641977805897', '2017-01-07 13:26:30', 'demo'),
-(16, 1, 'fb.856641977805897', '2017-01-07 13:27:10', 'demo'),
+(16, 2, 'fb.856641977805897', '2017-01-07 13:27:10', 'demo'),
 (17, 1, 'fb.856641977805897', '2017-01-12 00:00:00', 'demo'),
 (18, 1, 'fb.856641977805897', '2017-01-12 00:00:00', 'demo'),
 (19, 1, 'fb.856641977805897', '2017-01-12 00:00:00', 'demo'),
@@ -125,7 +124,7 @@ INSERT INTO `tr_notification` (`id`, `sender`, `receiver`, `status`, `content`) 
 CREATE TABLE `tr_post` (
   `id` int(11) NOT NULL,
   `describe` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `post_by` varchar(24) COLLATE utf8_unicode_ci NOT NULL,
   `date_post` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -135,17 +134,10 @@ CREATE TABLE `tr_post` (
 --
 
 INSERT INTO `tr_post` (`id`, `describe`, `image`, `post_by`, `date_post`) VALUES
-(1, 'An chè quân 1', 'yz994r8skz6euhfhydpk.jpg', 'fb.856641977805897', '2017-01-06 00:00:00'),
-(2, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(3, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(4, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(5, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(6, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(7, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(8, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(9, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(10, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(11, 'demo', 'yz994r8skz6euhfhydpk', 'fb.856641977805897', '2017-01-08 00:00:00');
+(1, 'An chè quân 1', 'http://res.cloudinary.com/trum/image/upload/v1483863783/ngoctrinh1.jpg', 'fb.856641977805897', '2017-01-06 00:00:00'),
+(2, 'demo', 'http://res.cloudinary.com/trum/image/upload/v1483863783/ngoctrinh2.jpg', 'fb.856641977805897', '2017-01-08 00:00:00'),
+(3, 'demo', 'http://res.cloudinary.com/trum/image/upload/v1483863782/ngoctrinh3.jpg', 'fb.856641977805897', '2017-01-08 00:00:00'),
+(4, 'demo', 'http://res.cloudinary.com/trum/image/upload/v1483863782/ngoctrinh4.jpg', 'fb.856641977805897', '2017-01-08 00:00:00');
 
 --
 -- Indexes for dumped tables
