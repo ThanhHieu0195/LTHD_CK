@@ -25,6 +25,9 @@ myApp.controller('myController', function($scope, $http) {
         $.removeCookie('token', { path: '/' });
         window.location = "/";
     };
+    $scope.loadpage = function () {
+    //    kich hoat hoat dong cua angular
+    };
 });
 
 myApp.controller('myNewFeed', function($scope, $http){
