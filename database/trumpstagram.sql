@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2017 at 09:57 AM
+-- Generation Time: Jan 09, 2017 at 10:30 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -43,8 +43,8 @@ CREATE TABLE `tr_account` (
 --
 
 INSERT INTO `tr_account` (`id`, `username`, `password`, `name`, `email`, `description`, `avata_link`, `birth`, `level`) VALUES
-('fb.856641977805897', 'Hi?u Thanh', '', 'Hi?u Thanh', '', '', 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/15873237_863333280470100_194497653299636377_n.jpg?oh=fd8b213b654f289ed02fa1b44426b2db&oe=58E6CF8B', '0000-00-00', 1),
-('S16Mls0Bx', 'hieuthanh', '123', 'Hi?u Thanh', '', 'asdasd', 'user.png', NULL, 1);
+('fb.864422863694475', 'Hi?u Thanh', '', 'Hi?u Thanh', '', '', 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/15873237_863333280470100_194497653299636377_n.jpg?oh=fd8b213b654f289ed02fa1b44426b2db&oe=58E6CF8B', '0000-00-00', 1),
+('r16ZyCeUl', 'handang', '123', 'Hân Ð?ng', '', '123', 'https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-1/p160x160/15822571_1419031641464659_5540641489783627097_n.jpg?oh=ca7281dc8a9542bb362c1c101403ddcb&oe=59188BFF', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -65,12 +65,12 @@ CREATE TABLE `tr_comment` (
 --
 
 INSERT INTO `tr_comment` (`id`, `post_id`, `comment_by`, `date_comment`, `content`) VALUES
-(15, 1, 'fb.856641977805897', '2017-01-07 13:26:30', 'demo'),
-(16, 2, 'fb.856641977805897', '2017-01-07 13:27:10', 'demo'),
-(17, 1, 'fb.856641977805897', '2017-01-12 00:00:00', 'demo'),
-(18, 1, 'fb.856641977805897', '2017-01-12 00:00:00', 'demo'),
-(19, 1, 'fb.856641977805897', '2017-01-12 00:00:00', 'demo'),
-(20, 1, 'fb.856641977805897', '2017-01-12 00:00:00', 'demo');
+(139, 24, 'r16ZyCeUl', '2017-01-09 15:53:04', '?nh nhòe'),
+(140, 24, 'fb.864422863694475', '2017-01-09 15:53:09', 'uh'),
+(141, 26, 'fb.864422863694475', '2017-01-09 15:59:08', ':3'),
+(142, 27, 'fb.864422863694475', '2017-01-09 16:02:29', 'Background d?p ~'),
+(143, 27, 'r16ZyCeUl', '2017-01-09 16:02:47', 'T?t nhiên :v'),
+(144, 28, 'fb.864422863694475', '2017-01-09 16:14:26', 'quá d?p');
 
 -- --------------------------------------------------------
 
@@ -113,7 +113,12 @@ CREATE TABLE `tr_notification` (
 --
 
 INSERT INTO `tr_notification` (`id`, `sender`, `receiver`, `status`, `content`) VALUES
-(1, '123456789000', 'fb.856641977805897', 0, 'hieuthanh v?a like post c?a b?n');
+(47, 'r16ZyCeUl', 'fb.864422863694475', 0, 'bình lu?n "?nh nhòe" trong post Ng?c trinh v?i áo dài'),
+(48, 'fb.864422863694475', 'fb.864422863694475', 0, 'bình lu?n "uh" trong post Ng?c trinh v?i áo dài'),
+(49, 'fb.864422863694475', 'r16ZyCeUl', 0, 'bình lu?n ":3" trong post lang mang'),
+(50, 'fb.864422863694475', 'r16ZyCeUl', 0, 'bình lu?n "Background d?p ~" trong post Ng?c trinh v?i bong bóng'),
+(51, 'r16ZyCeUl', 'r16ZyCeUl', 0, 'bình lu?n "T?t nhiên :v" trong post Ng?c trinh v?i bong bóng'),
+(52, 'fb.864422863694475', 'fb.864422863694475', 0, 'bình lu?n "quá d?p" trong post "Xinh tuoi"');
 
 -- --------------------------------------------------------
 
@@ -134,10 +139,14 @@ CREATE TABLE `tr_post` (
 --
 
 INSERT INTO `tr_post` (`id`, `describe`, `image`, `post_by`, `date_post`) VALUES
-(1, 'An chè quân 1', 'http://res.cloudinary.com/trum/image/upload/v1483863783/ngoctrinh1.jpg', 'fb.856641977805897', '2017-01-06 00:00:00'),
-(2, 'demo', 'http://res.cloudinary.com/trum/image/upload/v1483863783/ngoctrinh2.jpg', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(3, 'demo', 'http://res.cloudinary.com/trum/image/upload/v1483863782/ngoctrinh3.jpg', 'fb.856641977805897', '2017-01-08 00:00:00'),
-(4, 'demo', 'http://res.cloudinary.com/trum/image/upload/v1483863782/ngoctrinh4.jpg', 'fb.856641977805897', '2017-01-08 00:00:00');
+(21, 'vòng eo 56', 'http://res.cloudinary.com/trum/image/upload/v1483951670/y7wrjtlpuncdbenxyzib.jpg', 'fb.864422863694475', '2017-01-09 15:47:49'),
+(22, 'Vòng eo 56', 'http://res.cloudinary.com/trum/image/upload/v1483951703/uowsm7qui3peff4phkks.jpg', 'fb.864422863694475', '2017-01-09 15:48:22'),
+(23, 'Vòng eo 56 v3', 'http://res.cloudinary.com/trum/image/upload/v1483951732/qbwrevhxtbpjndeqm2ys.jpg', 'fb.864422863694475', '2017-01-09 15:48:51'),
+(24, 'Ng?c trinh v?i áo dài', 'http://res.cloudinary.com/trum/image/upload/v1483953130/bo-anh-ngoc-trinh-hoa-cong-chua-xinh-dep-3_wn0s8q.jpg', 'fb.864422863694475', '2017-01-09 15:50:33'),
+(25, 'water', 'http://res.cloudinary.com/trum/image/upload/v1483952196/e768d4djat2vavgtgvo1.jpg', 'fb.864422863694475', '2017-01-09 15:56:35'),
+(26, 'lang mang', 'http://res.cloudinary.com/trum/image/upload/v1483952216/lcb2znvnmqi0zgkqjusk.jpg', 'r16ZyCeUl', '2017-01-09 15:56:55'),
+(27, 'Ng?c trinh v?i bong bóng', 'http://res.cloudinary.com/trum/image/upload/v1483952312/nw9spwee3npp27netnrq.jpg', 'r16ZyCeUl', '2017-01-09 15:58:32'),
+(28, '"Xinh tuoi"', 'http://res.cloudinary.com/trum/image/upload/v1483953027/kgzb1j9a3zmj985oocc6.jpg', 'fb.864422863694475', '2017-01-09 16:10:26');
 
 --
 -- Indexes for dumped tables
@@ -187,17 +196,17 @@ ALTER TABLE `tr_post`
 -- AUTO_INCREMENT for table `tr_comment`
 --
 ALTER TABLE `tr_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 --
 -- AUTO_INCREMENT for table `tr_notification`
 --
 ALTER TABLE `tr_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `tr_post`
 --
 ALTER TABLE `tr_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- Constraints for dumped tables
 --
