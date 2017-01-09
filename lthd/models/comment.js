@@ -5,6 +5,18 @@ var helper = require("../config/helper");
 var connection = require('../config/sqlConnection');
 var mysql = require('mysql');
 module.exports = {
+    getTopComment: function (res) {
+        var sql = 'select count(tr_comment.id) num, comment_by, tr_account.username commenter, tr_account.avata_link avt_commenter ' +
+            'from tr_comment left join tr_account on tr_account.id = comment_by ' +
+            'group by comment_by order by num desc limit 10;';
+        console.log(sql);
+        connection.query(sql, function (err, rows, fields) {
+            if (err) {
+                res.status(400).end('Thực hiện truy vấn ở bảng tr_comment bị lỗi');
+            }
+            res.status(200).json(rows);
+        });
+    },
     del:function (id, res) {
         connection.query('DELETE FROM tr_comment WHERE id = ?', id, function (err, result) {
             if (err) {

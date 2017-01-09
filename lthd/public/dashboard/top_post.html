@@ -1,0 +1,42 @@
+<!-- Friend List
+           ================================================= -->
+
+<div id="page-contents" ng-controller="topPost" ng-mouseover="loadpage()">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 static">
+            </div>
+            <div class="col-md-8">
+               <!---->
+                <div class="media">
+                    <div class="row js-masonry" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": true }'>
+                        <div class="grid-sizer col-md-6 col-sm-6"></div>
+                        <div class="grid-item col-md-6 col-sm-6" ng-repeat="post in list_toppost">
+                            <div class="media-grid">
+                                <div class="img-wrapper" data-toggle="modal" data-target=".modal-1">
+                                    <img src="{{post.image}}" alt="" class="img-responsive post-image" />
+                                </div>
+                                <div class="media-info">
+                                    <!--<div class="reaction">-->
+                                        <!--<a class="btn text-green"><i class="fa fa-thumbs-up"></i> 63</a>-->
+                                        <!--<a class="btn text-red"><i class="fa fa-thumbs-down"></i> 12</a>-->
+                                    <!--</div>-->
+                                    <div class="user-info">
+                                        <img src="{{post.avt_poster}}" alt="" class="profile-photo-sm pull-left" />
+                                        <div class="user">
+                                            <h6><a href="#" class="profile-link" ng-bind="post.poster"></a></h6>
+                                            <span ng-bind="post.num"></span>
+                                            <span class="text-blue">bình luận</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+            </div>
+        </div>
+    </div>
+</div>
+

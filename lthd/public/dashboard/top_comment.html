@@ -1,0 +1,33 @@
+<!-- Friend List
+           ================================================= -->
+
+<div id="page-contents" ng-controller="topComment" ng-mouseover="loadpage()">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 static">
+            </div>
+            <div class="col-md-8">
+                <div class="top-comment">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6" ng-repeat="comment in list_topcomment">
+                            <div class="commenter-card">
+                                <img src="images/covers/1.jpg" alt="profile-cover" class="img-responsive cover" />
+                                <div class="card-info">
+                                    <img ng-src="{{comment.avt_commenter}}" alt="{{comment.commenter}}" class="profile-photo-lg" />
+                                    <div class="friend-info">
+                                        <a href="#" class="pull-right text-red" ng-bind="$index+1"></a>
+                                        <h5><a href="timeline.html" class="profile-link notification_count" ng-bind="comment.commenter"></a></h5>
+                                        <p>Number commented: {{comment.num}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

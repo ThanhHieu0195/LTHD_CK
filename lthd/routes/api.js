@@ -12,6 +12,16 @@ module.exports = function (router, passport) {
         crawler.get(res);
     });
 
+    router.get('/topcomment', function (req, res) {
+        var comment = require("../models/comment");
+        comment.getTopComment(res);
+    });
+
+    router.get('/toppost', function (req, res) {
+        var post = require("../models/post");
+        post.getTopPost(res);
+    });
+
     router.use(passport.authenticate(['bearer'], {session: false}));
 
     router.get('/', function (req, res) {

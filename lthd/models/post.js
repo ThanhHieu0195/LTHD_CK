@@ -7,6 +7,19 @@ var connection = require('../config/sqlConnection');
 var mysql = require('mysql');
 
 module.exports = {
+    getTopPost: function (res) {
+        var sql = 'select count(tr_comment.id) num, tr_post.*, tr_account.username poster, tr_account.avata_link avt_poster ' +
+            'from tr_post left join tr_account on tr_account.id = post_by ' +
+            'join tr_comment on tr_comment.post_id = tr_post.id ' +
+            'group by tr_post.id order by num desc limit 10;';
+        console.log(sql);
+        connection.query(sql, function (err, rows, fields) {
+            if (err) {
+                res.status(400).end('Thực hiện truy vấn ở bảng tr_comment bị lỗi'+sql);
+            }
+            res.status(200).json(rows);
+        });
+    },
     insert:function (req, res) {
         var data = req.body;
         data.authorization = req.headers.authorization;

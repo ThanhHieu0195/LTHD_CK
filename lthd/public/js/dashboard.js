@@ -12,8 +12,11 @@ myApp.config(function($routeProvider) {
         .when("/", {
             templateUrl : "newsfeed.html"
         })
-        .when("/register", {
-            templateUrl : "newsfeed.html"
+        .when("/top_comment", {
+            templateUrl : "top_comment.html"
+        })
+        .when("/top_post", {
+            templateUrl : "top_post.html"
         })
         .otherwise({
             templateUrl : "reset_url.html"
@@ -223,4 +226,34 @@ myApp.controller('myNewFeed', function($scope, $http){
         $scope.logOut();
     });
 
+});
+
+myApp.controller('topComment', function($scope, $http) {
+    $scope.logOut = function () {
+        $.removeCookie('token', { path: '/' });
+        window.location = "/";
+    };
+    $scope.loadpage = function () {
+        //    kich hoat hoat dong cua angular
+    };
+    var link = link_api+'topcomment';
+    $http.get(link).then(function successCallback(res){
+        console.log(res);
+        $scope.list_topcomment = res.data;
+    });
+});
+
+myApp.controller('topPost', function($scope, $http) {
+    $scope.logOut = function () {
+        $.removeCookie('token', { path: '/' });
+        window.location = "/";
+    };
+    $scope.loadpage = function () {
+        //    kich hoat hoat dong cua angular
+    };
+    var link = link_api+'toppost';
+    $http.get(link).then(function successCallback(res){
+        console.log(res);
+        $scope.list_toppost= res.data;
+    });
 });
