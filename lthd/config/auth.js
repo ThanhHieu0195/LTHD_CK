@@ -2,12 +2,18 @@
  * Created by quang on 11/28/2016.
  */
 module.exports = {
+    // host
+    // 'facebookAuth' : {
+    //     'clientID': '203198970145713',
+    //     'clientSecret': '72830f248635f4dc8e2a7a215f153643',
+    //     'callbackURL': "http://localhost:3000/auth/facebook/return"
+    // },
+    // local
     'facebookAuth' : {
-        'clientID': '203198970145713',
-        'clientSecret': '72830f248635f4dc8e2a7a215f153643',
+        'clientID': '1874731906079001',
+        'clientSecret': '5113c7d97fbe314ef228874903c17bc3',
         'callbackURL': "http://localhost:3000/auth/facebook/return"
     },
-
     'googleAuth' : {
         'consumerKey': 'GOOGLE_CONSUMER_KEY',
         'consumerSecret': 'GOOGLE_CONSUMER_SECRET',
