@@ -3,6 +3,8 @@ module.exports = {
         var Crawler = require("crawler");
         var url = require('url');
         var arr = [];
+        link_page = 'http://www.24h.com.vn/nguoi-mau-nu-hoang-do-lot-ngoc-trinh-c78e1808.html';
+
         var c = new Crawler({
             maxConnections : 10,
             // This will be called for each crawled page
@@ -16,7 +18,7 @@ module.exports = {
                     $(".news-title a").each(function (index, a) {
                         var data = {href:'', title:''};
                         if (a.name == 'a' && run <= limit) {
-                            data.href = a.attribs.href;
+                            data.href = link_page+a.attribs.href;
                             data.title = a.attribs.title;
                             arr.push(data);
                             run++;
@@ -28,6 +30,6 @@ module.exports = {
 
             }
         });
-        c.queue('http://www.24h.com.vn/nguoi-mau-nu-hoang-do-lot-ngoc-trinh-c78e1808.html');
+        c.queue(link_page);
     }
 };

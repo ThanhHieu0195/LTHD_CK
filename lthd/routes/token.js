@@ -38,8 +38,7 @@ router.post('/', function (req, res, next) {
                         exp: account.exp
                     }
                     res.cookie('token', tokenData.type+ ' ' +tokenData.token);
-                    console.log(tokenData);
-                    res.redirect('/');
+                    res.json(tokenData);
                 }
             });
         }
