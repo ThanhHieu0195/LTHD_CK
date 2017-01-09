@@ -5,6 +5,14 @@ var helper = require("../config/helper");
 var connection = require('../config/sqlConnection');
 var mysql = require('mysql');
 module.exports = {
+    del:function (id, res) {
+        connection.query('DELETE FROM tr_comment WHERE id = ?', id, function (err, result) {
+            if (err) {
+                res.status(400).end('Thực hiện truy vấn ở bảng tr_comment bị lỗi');
+            }
+            res.status(200).end('Thao tác thành công');
+        });
+    },
     insert:function (req, res) {
         var data = req.body;
         data.authorization = req.headers.authorization;

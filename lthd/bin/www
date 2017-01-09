@@ -101,9 +101,11 @@ io.on('connection', function(socket){
 
     socket.on('update_comment', function(data){
         console.log(data);
-        var sender = data.sender;
-        var receiver = data.receiver;
-        var content = data.content;
         io.emit( 'update_comment', data);
+    });
+
+    socket.on('del_comment', function(data){
+        console.log(data);
+        io.emit( 'del_comment', data);
     });
 });

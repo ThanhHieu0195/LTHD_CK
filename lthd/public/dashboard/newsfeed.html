@@ -11,7 +11,7 @@
           <div class="profile_num">
             <a href="javascript:void(0)" class="text-white"><i class="ion glyphicon glyphicon-pencil"></i> {{num_posted}} posted</a>
             <a href="javascript:void(0)" class="text-white"><i class="ion glyphicon glyphicon-pencil"></i> {{num_commented}} commented</a>
-            <a href="javascript:void(0)" class="text-white" ng-click="show_notification()" ><i class="ion glyphicon glyphicon-pencil"></i> <span id="notification_count">{{num_commented}}</span> notification</a>
+            <a href="javascript:void(0)" class="text-white" ng-click="show_notification()" ><i class="ion glyphicon glyphicon-pencil"></i> <span id="notification_count">{{num_notification}}</span> notification</a>
           </div>
         </div><!--profile card ends-->
 
@@ -34,8 +34,8 @@
 
         <div id="notification-block">
           <h4 class="grey">Notification</h4>
-          <div class="notificationsBody">
-            <a class="text-green">HiếuThanh vừa like ảnh của bạn</a>
+          <div class="notificationsBody" ng-repeat="noti in list_notification">
+            <a class="text-green">{{noti.sender_name}} đã {{noti.content}} của bạn</a>
           </div>
         </div>
 
@@ -45,7 +45,7 @@
           <div class="row">
             <div class="col-md-7 col-sm-7">
               <div class="form-group">
-                <img ng-src="{{profile.data.avata_link}}" alt="" class="profile-photo-md">
+                <a href="{{profile.data.avata_link}}" target="_blank"> <img ng-src="{{profile.data.avata_link}}"  alt="" class="profile-photo-md"></a>
                 <textarea name="texts" ng-model="content_post" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
               </div>
             </div>
@@ -69,8 +69,8 @@
         </div>
         <!-- Post Content
         ================================================= -->
-        <div class="post-content" ng-repeat="feed in list_newsfeed ">
-          <img ng-src="{{feed.image}}" alt="post-image" class="img-responsive post-image" />
+        <div class="post-content" ng-repeat="feed in list_newsfeed">
+          <a ng-href="{{feed.image}}" target="_blank"><img ng-src="{{feed.image}}" alt="post-image" class="img-responsive post-image" /></a>
           <div class="post-container">
             <img ng-src="{{feed.avt_poster}}" alt="user" class="profile-photo-md pull-left" />
             <div class="post-detail">
@@ -78,23 +78,25 @@
                 <h5><a href="timeline" class="profile-link">{{feed.poster}}</a> <span class="following">following</span></h5>
                 <p class="text-muted">Published a photo: {{feed.date_post}}</p>
               </div>
-              <div class="reaction">
-                <a class="btn btn-like text-green"><i class="icon ion-thumbsup" alt="Like"></i> 13</a>
-                <a class="btn btn-dislike text-red"><i class="fa fa-thumbs-down" alt="Dislike"></i> 0</a>
-              </div>
+              <!--<div class="reaction">-->
+                <!--<a class="btn btn-like text-green"><i class="icon ion-thumbsup" alt="Like"></i> 13</a>-->
+                <!--<a class="btn btn-dislike text-red"><i class="fa fa-thumbs-down" alt="Dislike"></i> 0</a>-->
+              <!--</div>-->
               <div class="line-divider"></div>
               <div class="post-text">
                 <p>{{feed.describe}}</p>
               </div>
               <div class="line-divider"></div>
-              <div class="post-comment" ng-repeat="comment in list_comment[feed.id]">
-                <img ng-src="{{comment.avt_commenter}}" alt="" class="profile-photo-sm" />
-                <p><a href="timeline" class="profile-link">{{comment.commenter}} </a><i class="em em-laughing"></i> {{comment.content}} </p>
+              <div class="post-comment" ng-repeat="comment in list_comment[feed.id]" ng-hide="comment.content==''">
+                <img ng-src="{{comment.avt_commenter}}" alt="" class="profile-photo-sm" />&nbsp;
+                <p><a href="timeline" class="profile-link">{{comment.commenter}} </a> {{comment.content}} </p>
+                <p ng-bind="comment.notification_comment" style="color:red"></p>
+                <i style="position: absolute;right: 0;" ng-if="profile.data.id == comment.comment_by"><img ng-click="del_comment($parent.comment)" class="ht-remove" src="https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-22-128.png" alt=""></i>
               </div>
 
               <div class="post-comment">
                 <img ng-src="{{profile.data.avata_link}}" alt="" class="profile-photo-sm" />
-                <input type="text" class="form-control" ng-model="comment_content" placeholder="Post a comment" post_id="{{feed.id}}" ng-keyup="push_comment($event.keyCode, $parent.list_newsfeed[$index], comment_content)">
+                <input type="text" class="form-control" ng-model="feed.comment_content" placeholder="Post a comment" post_id="{{feed.id}}" ng-keyup="push_comment($event.keyCode, feed)">
               </div>
             </div>
           </div>

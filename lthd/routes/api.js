@@ -66,4 +66,24 @@ module.exports = function (router, passport) {
         var post_id = req.params.post_id;
         comment.getCommentByPostId(post_id, res);
     });
+
+    router.delete('/comment/:id', function (req, res) {
+        var comment = require("../models/comment");
+        var id = req.params.id;
+        comment.del(id, res);
+    });
+//    notication
+    router.get('/notification', function (req, res) {
+        var notification = require("../models/notification");
+        notification.get(req, res);
+    });
+
+    router.get('/notification/count', function (req, res) {
+        var notification = require("../models/notification");
+        notification.count(req, res);
+    });
+    router.put('/notification/', function (req, res) {
+        var notification = require("../models/notification");
+        notification.seem(req, res);
+    });
 }

@@ -2083,3 +2083,10 @@ ul.contact li i{
 .ion-images:before {
   font-size: 20px;
 }
+.ht-remove {
+  width: 15px;
+}
+.ht-remove:hover{
+  background-color: #e9000f;
+  border-radius: 10px;
+}

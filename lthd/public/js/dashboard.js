@@ -52,9 +52,13 @@ myApp.controller('myController', function($scope, $http) {
              socket.emit( 'notification', data_notification);
          };
 
-            $scope.update_comment = function (obj_comment) {
-                socket.emit( 'update_comment', obj_comment);
-            };
+        $scope.notification_update_comment = function (obj_comment) {
+            socket.emit( 'update_comment', obj_comment);
+        };
+
+        $scope.notification_del_comment = function (obj_comment) {
+            socket.emit( 'del_comment', obj_comment);
+        };
     },
     function errorCallback( res ) {
         alert('time out');
@@ -63,6 +67,9 @@ myApp.controller('myController', function($scope, $http) {
 });
 
 myApp.controller('myNewFeed', function($scope, $http){
+    $scope.load = function () {
+
+    };
     socket.on('update_comment', function (obj) {
         console.log(obj);
         var post_id = obj.post_id;
@@ -80,6 +87,17 @@ myApp.controller('myNewFeed', function($scope, $http){
             $scope.list_comment[post_id].push(obj);
         }
     });
+
+    socket.on('del_comment', function (obj) {
+        for (var i = 0; i<$scope.list_comment[obj.post_id].length; i++) {
+            if ($scope.list_comment[obj.post_id][i].id == obj.id) {
+                $scope.list_comment[obj.post_id][i].content= '';
+                $scope.list_comment[obj.post_id][i].notification_comment= 'Bình luận đã được thu hôi';
+            }
+        }
+
+    });
+
 
     //Load data new feed
     var link_newfeed = link_api+'newfeed/1';
@@ -104,6 +122,19 @@ myApp.controller('myNewFeed', function($scope, $http){
     $http.get(link_new_photos).then(function successCallback(res) {
         $scope.new_photos = res.data;
     });
+    //load notification
+    var link_notification = link_api+'notification';
+    $http.get(link_notification).then(function successCallback(res) {
+        $scope.list_notification = res.data;
+    });
+
+    var link_notification_count = link_api+'notification/count';
+    $http.get(link_notification_count).then(function successCallback(res) {
+        $scope.num_notification = res.data;
+        if ($scope.num_notification == undefined) {
+            $scope.num_notification = 0;
+        }
+    });
 
     $scope.show_notification = function () {
         $("#notificationContainer").fadeToggle(300);
@@ -111,9 +142,9 @@ myApp.controller('myNewFeed', function($scope, $http){
         return false;
     };
 
-    $scope.push_comment = function (key, obj, content) {
-        var post_id = obj.id;
-        var content = content;
+    $scope.push_comment = function (key, feed) {
+        var post_id = feed.id;
+        var content = feed.comment_content;
         var link_push_comment = link_api+'comment';
         var data = {post_id:post_id, content:content};
         if (key == 13) {
@@ -131,8 +162,9 @@ myApp.controller('myNewFeed', function($scope, $http){
                 if ($scope.list_comment[post_id] == undefined) {
                     $scope.list_comment[post_id] = [];
                 }
+                feed.comment_content = '';
                 $scope.list_comment[post_id].push(obj_comment);
-                $scope.update_comment(obj_comment);
+                $scope.notification_update_comment(obj_comment);
             });
         }
     };
@@ -163,5 +195,19 @@ myApp.controller('myNewFeed', function($scope, $http){
             alert('Thông tin rỗng');
         }
     }
+
+    $scope.del_comment = function (obj) {
+        var link = link_api+'comment/'+obj.id;
+        var is_ok = true;
+        // var is_ok = confirm('Are you ok ?');
+        if (is_ok==true) {
+            $http.delete(link).then(function successCallback(res) {
+                $scope.notification_del_comment(obj);
+                obj.notification_comment = "Bình luận đã được thu hôi";
+                obj.content='';
+            });
+        }
+    }
+
 
 });
