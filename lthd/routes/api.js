@@ -82,8 +82,14 @@ module.exports = function (router, passport) {
         var notification = require("../models/notification");
         notification.count(req, res);
     });
-    router.put('/notification/', function (req, res) {
+
+    router.put('/notification', function (req, res) {
         var notification = require("../models/notification");
         notification.seem(req, res);
+    });
+
+    router.post('/notification', function (req, res) {
+        var notification = require("../models/notification");
+        notification.insert(req, res);
     });
 }

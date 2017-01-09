@@ -3,6 +3,7 @@
  */
 var helper = require("../config/helper");
 var connection = require('../config/sqlConnection');
+var constants = require('../config/constants');
 var mysql = require('mysql');
 module.exports = {
     insert:function (req, res) {
@@ -11,16 +12,23 @@ module.exports = {
         var sender = helper.get_id_account_current(data.authorization);
         var receiver = data.receiver;
         var content = data.content;
-        var status = 0;
+        var status = constants.STATUS_CREATE;
 
-        if ( icomment.post_id == '' || icomment.content == '' ) {
+        iNoti = {
+            sender:sender,
+            receiver:receiver,
+            status:status,
+            content:content
+        };
+
+        if ( iNoti.sender == '' || iNoti.receiver == '' ) {
             res.status(400).end('Dữ liệu không hợp lệ');
         }
-        connection.query('insert into tr_comment set ?', icomment, function (err, result) {
+        connection.query('insert into tr_notification set ?', iNoti, function (err, result) {
             if (err) {
                 res.status(400).end('Thực hiện truy vấn ở bảng tr_comment bị lỗi');
             }
-            res.status(200).end('thao tác thành công');
+            res.status(200).json(result);
         });
     },
     get:function (req, res) {

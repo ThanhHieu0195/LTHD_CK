@@ -19,6 +19,7 @@ html(lang='en', ng-app="myDashboard")
     link(href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700', rel='stylesheet', type='text/css')
     // Favicon
     link(rel='shortcut icon', type='image/png', href='images/fav.png')
+
   body(ng-controller="myController")
     //
       Header
@@ -39,11 +40,13 @@ html(lang='en', ng-app="myDashboard")
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right.main-menu
               li.dropdown
-                a(href='#/newsfeed') Home
-              li.dropdown
                 a(href='#/newsfeed') Newsfeed
               li.dropdown
-                a(href='#/contact') Contact
+                a(href='#/newsfeed') Top Comment
+              li.dropdown
+                a(href='#/contact') Top Post
+              li.dropdown
+                a(href='#/contact') contact
               li.dropdown
                 a(href="javascript:void(0", ng-click="logOut()") Logout
             form.navbar-form.navbar-left.hidden-sm
@@ -114,11 +117,10 @@ html(lang='en', ng-app="myDashboard")
     script(src='../libs/bootstrap/js/bootstrap.min.js')
     script(src='../libs/js/jquery.sticky-kit.min.js')
     script(src='../libs/js/jquery.scrollbar.min.js')
-    script(src='js/script.js')
-    script(src='js/noti.js')
     script(src="../libs/js/angular.min.js")
     script(src="../libs/js/angular-route.js")
     script(src="../libs/js/jquery-cookie.js")
     script(src="../libs/js/socket.io.js")
+    script(src="../libs/js/notify.min.js")
+    script(src='js/script.js')
     script(src="../js/dashboard.js")
-

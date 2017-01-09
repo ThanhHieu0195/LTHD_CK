@@ -9,5 +9,7 @@ module.exports = {
         api_key: '997155885616554',
         api_secret: '9mX1Yaf-D5d4Pe6sNSJQdprJaU0'
     },
-    'AVT_USER':'http://res.cloudinary.com/trum/image/upload/user.png'
+    'AVT_USER':'http://res.cloudinary.com/trum/image/upload/user.png',
+    'STATUS_CREATE':0,
+    'STATUS_SEEM':1
 };
