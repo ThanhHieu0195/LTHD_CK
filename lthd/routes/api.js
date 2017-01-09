@@ -6,6 +6,12 @@ var helper = require("../config/helper");
 var connection = require('../config/sqlConnection');
 
 module.exports = function (router, passport) {
+    //rut chich thong tin
+    router.get('/crawler', function (req, res) {
+        var crawler = require("../models/crawler");
+        crawler.get(res);
+    });
+
     router.use(passport.authenticate(['bearer'], {session: false}));
 
     router.get('/', function (req, res) {

@@ -1103,10 +1103,14 @@ ul.online-users li span.online-dot{
   width: 384px;
   border-bottom: 1px solid #dddddd;
 }
-#notificationsBody
+#notificationsBody, #crawlerBody
 {
   padding: 33px 0px 0px 0px !important;
   min-height:300px;
+}
+.notificationsBody:nth-child(even), .crawlerBody:nth-child(even) {background: rgb(80, 176, 224);    padding: 2px 2px;}
+.notificationsBody:nth-child(even) a, .crawlerBody:nth-child(even) a {
+  color:white;
 }
 #notificationFooter
 {

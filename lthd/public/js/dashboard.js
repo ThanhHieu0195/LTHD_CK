@@ -62,7 +62,7 @@ myApp.controller('myNewFeed', function($scope, $http){
         socket.on($scope.profile.data.id, function (obj) {
             $scope.num_notification = parseInt($scope.num_notification) + 1;
             $scope.list_notification.push(obj);
-            $.notify("Có thông báo mới", "success");
+            $.notify("Bạn vừa nhận thông báo mới", "success");
         });
 
         socket.on('update_comment', function (obj) {
@@ -130,7 +130,11 @@ myApp.controller('myNewFeed', function($scope, $http){
                 $scope.num_notification = 0;
             }
         });
-
+        //    rut chich du lieu
+        var link_crawler = link_api+'crawler';
+        $http.get(link_crawler).then(function successCallback(res) {
+            $scope.list_crawler = res.data;
+        });
         $scope.show_notification = function () {
             $("#notificationContainer").fadeToggle(300);
             $("#notification_count").fadeOut("slow");
@@ -207,6 +211,8 @@ myApp.controller('myNewFeed', function($scope, $http){
                 });
             }
         }
+
+
     },function errorCallback( res ) {
         alert('time out');
         $scope.logOut();

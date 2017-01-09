@@ -35,7 +35,14 @@
         <div id="notification-block">
           <h4 class="grey">Notification</h4>
           <div class="notificationsBody" ng-repeat="noti in list_notification">
-            <a class="text-green">{{noti.sender_name}}  {{noti.content}} của bạn</a>
+            <a class="text-blue">{{noti.sender_name}}  <i>{{noti.content}}</i> của bạn</a>
+          </div>
+        </div>
+
+        <div id="crawler-block">
+          <h4 class="grey">News</h4>
+          <div class="crawlerBody" ng-repeat="crawler in list_crawler">
+            <a class="text-blue" href="{{crawler.href}}" target="_blank">{{crawler.title}}</a>
           </div>
         </div>
 
