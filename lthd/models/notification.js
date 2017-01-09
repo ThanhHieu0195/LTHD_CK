@@ -53,7 +53,7 @@ module.exports = {
             res.status(400).end();
         }
         var sql = "update ?? set status=? where receiver=?";
-        sql = mysql.format( sql,  ['tr_notification', 0, receiver]);
+        sql = mysql.format( sql,  ['tr_notification', 1, receiver]);
         connection.query(sql, function (err, rows, fields) {
             console.log(sql);
             res.status(200).json(rows);

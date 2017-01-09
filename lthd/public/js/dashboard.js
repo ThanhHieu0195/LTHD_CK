@@ -139,9 +139,11 @@ myApp.controller('myNewFeed', function($scope, $http){
             $scope.list_crawler = res.data;
         });
         $scope.show_notification = function () {
-            $("#notificationContainer").fadeToggle(300);
-            $("#notification_count").fadeOut("slow");
-            return false;
+            var link = link_api+'notification';
+            $http.put(link).then(function successCallback(res) {
+                $scope.num_notification = 0;
+                $scope.list_notification = [];
+            });
         };
 
         $scope.push_comment = function (key, feed) {
