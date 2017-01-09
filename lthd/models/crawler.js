@@ -13,7 +13,7 @@ module.exports = {
                     var $ = res.$;
                     var limit = 10;
                     var run=0;
-                    $(".title_news a").each(function (index, a) {
+                    $(".news-title a").each(function (index, a) {
                         var data = {href:'', title:''};
                         if (a.name == 'a' && run <= limit) {
                             data.href = a.attribs.href;
@@ -28,6 +28,6 @@ module.exports = {
 
             }
         });
-        c.queue('http://vnexpress.net/');
+        c.queue('http://www.24h.com.vn/nguoi-mau-nu-hoang-do-lot-ngoc-trinh-c78e1808.html');
     }
 };
