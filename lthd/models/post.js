@@ -61,20 +61,24 @@ module.exports = {
                 arr_id.push(row.id);
             })
             .on('end', function () {
-                // res.json(data);
-                var query_comment = connection.query('select tr_comment.*, tr_account.username commenter, tr_account.avata_link avt_commenter from tr_comment left join  tr_account on tr_account.id = comment_by ' +
-                    'where post_id in ('+arr_id.toString()+') group by post_id, id');
-                console.log(query_comment.sql);
-                query_comment
-                    .on('result', function (row) {
-                        if (data_comment[row.post_id] == undefined) {
-                            data_comment[row.post_id] = [];
-                        }
-                        data_comment[row.post_id].push(row);
-                    })
-                    .on('end', function () {
-                        res.json({data:data, data_comment:data_comment});
-                    });
+                if (arr_id.length >0) {
+                    var query_comment = connection.query('select tr_comment.*, tr_account.username commenter, tr_account.avata_link avt_commenter from tr_comment left join  tr_account on tr_account.id = comment_by ' +
+                        'where post_id in ('+arr_id.toString()+') group by post_id, id');
+                    console.log(query_comment.sql);
+                    query_comment
+                        .on('result', function (row) {
+                            if (data_comment[row.post_id] == undefined) {
+                                data_comment[row.post_id] = [];
+                            }
+                            data_comment[row.post_id].push(row);
+                        })
+                        .on('end', function () {
+                            res.json({data:data, data_comment:data_comment});
+                        });
+                } else {
+                    res.json({data:data, data_comment:data_comment});
+                }
+
             });
 
     },

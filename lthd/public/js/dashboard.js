@@ -169,7 +169,7 @@ myApp.controller('myNewFeed', function($scope, $http){
                     $scope.notification_update_comment(obj_comment);
                     $scope.sendNotification({receiver:feed.post_by,
                         content:'bình luận "'+obj_comment.content+'" trong post '+feed.describe,
-                        sender_name:feed.poster
+                        sender_name:obj_comment.commenter
                     });
                 });
             }
