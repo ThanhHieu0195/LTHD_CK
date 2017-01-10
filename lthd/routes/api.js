@@ -108,4 +108,9 @@ module.exports = function (router, passport) {
         var notification = require("../models/notification");
         notification.insert(req, res);
     });
+//    chat
+    router.get('/chat', function (req, res) {
+        var chat = require("../models/chat");
+        chat.getChat(req, res);
+    });
 }

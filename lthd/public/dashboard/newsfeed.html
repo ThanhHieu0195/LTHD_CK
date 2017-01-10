@@ -4,10 +4,11 @@
 
       <!-- Newsfeed Common Side Bar Left
       ================================================= -->
+
       <div class="col-md-3 static">
         <div class="profile-card">
           <img ng-src="{{profile.data.avata_link}}" alt="user" class="profile-photo" />
-          <h5><a href="timeline" class="text-white">{{profile.data.username}}</a></h5>
+          <h5><a href="javascript:void(0)" class="text-white">{{profile.data.username}}</a></h5>
           <div class="profile_num">
             <a href="javascript:void(0)" class="text-white"><i class="ion glyphicon glyphicon-pencil"></i> {{num_posted}} posted</a>
             <a href="javascript:void(0)" class="text-white"><i class="ion glyphicon glyphicon-pencil"></i> {{num_commented}} commented</a>
@@ -18,21 +19,21 @@
 
 
         <ul class="nav-news-feed">
-          <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed">My Newsfeed</a></div></li>
-          <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby">People Nearby</a></div></li>
-          <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends">Friends</a></div></li>
-          <li><i class="icon ion-images"></i><div><a href="newsfeed-images">Images</a></div></li>
-          <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos">Videos</a></div></li>
+          <li><i class="icon ion-ios-paper"></i><div><a href="javascript:void(0)">My Newsfeed</a></div></li>
+          <li><i class="icon ion-ios-people"></i><div><a href="javascript:void(0)">People Nearby</a></div></li>
+          <li><i class="icon ion-ios-people-outline"></i><div><a href="javascript:void(0)">Friends</a></div></li>
+          <li><i class="icon ion-images"></i><div><a href="javascript:void(0)">Images</a></div></li>
+          <li><i class="icon ion-ios-videocam"></i><div><a href="javascript:void(0)">Videos</a></div></li>
         </ul><!--news-feed links ends-->
 
-        <div id="photos-block">
+        <div id="photos-block" ng-if="new_photos.length > 0">
           <h4 class="grey">New Photo</h4>
           <ul class="online-users list-inline">
             <li ng-repeat="photo in new_photos  track by $index"><a target="_blank" href="{{photo}}" title=""><img ng-src="{{photo;}}" alt="user" class="img-responsive new-photo" /></a></li>
           </ul>
         </div><!--chat block ends-->
 
-        <div id="notification-block">
+        <div id="notification-block" ng-if="list_notification.length > 0">
           <h4 class="grey">Notification</h4>
           <div class="notificationsBody" ng-repeat="noti in list_notification">
             <a class="text-blue">{{noti.sender_name}}  <i>{{noti.content}}</i> của bạn</a>
@@ -82,7 +83,7 @@
             <img ng-src="{{feed.avt_poster}}" alt="user" class="profile-photo-md pull-left" />
             <div class="post-detail">
               <div class="user-info">
-                <h5><a href="timeline" class="profile-link">{{feed.poster}}</a> <span class="following">following</span></h5>
+                <h5><a href="javascript:void(0)" class="profile-link">{{feed.poster}}</a> <span class="following">following</span></h5>
                 <p class="text-muted">Published a photo: {{feed.date_post}}</p>
               </div>
               <!--<div class="reaction">-->
@@ -96,7 +97,7 @@
               <div class="line-divider"></div>
               <div class="post-comment" ng-repeat="comment in list_comment[feed.id]" ng-hide="comment.content==''">
                 <img ng-src="{{comment.avt_commenter}}" alt="" class="profile-photo-sm" />&nbsp;
-                <p><a href="timeline" class="profile-link">{{comment.commenter}} </a> {{comment.content}} </p>
+                <p><a href="javascript:void(0)" class="profile-link">{{comment.commenter}} </a> {{comment.content}} </p>
                 <p ng-bind="comment.notification_comment" style="color:red"></p>
                 <i style="position: absolute;right: 0;" ng-if="profile.data.id == comment.comment_by"><img ng-click="del_comment($parent.comment)" class="ht-remove" src="https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-22-128.png" alt=""></i>
               </div>

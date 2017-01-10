@@ -18,6 +18,9 @@ myApp.config(function($routeProvider) {
         .when("/top_post", {
             templateUrl : "top_post.html"
         })
+        .when("/chat", {
+            templateUrl : "chat.html"
+        })
         .otherwise({
             templateUrl : "reset_url.html"
         });
@@ -256,4 +259,25 @@ myApp.controller('topPost', function($scope, $http) {
         console.log(res);
         $scope.list_toppost= res.data;
     });
+});
+
+myApp.controller('chat', function($scope, $http) {
+    $scope.logOut = function () {
+        $.removeCookie('token', { path: '/' });
+        window.location = "/";
+    };
+    $scope.loadpage = function () {
+        //    kich hoat hoat dong cua angular
+    };
+    var link = link_api+'chat';
+    $http.get(link).then(function successCallback(res){
+        console.log(res);
+        $scope.list_friend = res.data.list_friend;
+        $scope.list_chat= res.data.list_chat;
+        $scope.current_chat = undefined;
+    });
+    $scope.show_message = function (friend) {
+        console.log($scope.list_chat[friend.id]);
+        $scope.current_chat = $scope.list_chat[friend.id];
+    }
 });

@@ -32,7 +32,7 @@ module.exports = function (router, passport) {
                 exp: user.exp
             }
             res.cookie('token', tokenData.type+ ' ' +tokenData.token);
-            account.facebook.sign(data);
+            account.facebook.sign(data, res);
             res.redirect('/dashboard');
         });
 }

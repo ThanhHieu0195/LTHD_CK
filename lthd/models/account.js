@@ -38,15 +38,15 @@ module.exports = {
         });
     },
     facebook:{
-        sign:function (data) {
+        sign:function (data, res) {
             var id = data.id;
             var iaccount = {id:data.id, username:data.username, password:'', name:data.username,
                 email:'', description:'', avata_link:data.avata_link, birth:'', level:constants.LEVEL_MEMBER};
             sql = "select count(*) num from tr_account where id = ?";
             connection.query(sql, id, function (err, result) {
-                console.log('insert');
-                console.log(result[0].num);
-                if ( result[0].num == 0 ) {
+                console.log(err);
+                if (err) {throw err; console.log('Kiểm tra kết nối đến mysql'); return;}
+                if ( result[0].num == 0 || result[0].num == undefined ) {
                     sql = 'insert into tr_account set ?';
                     connection.query(sql, iaccount, function (err, result) {
                         

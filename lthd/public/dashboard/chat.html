@@ -1,0 +1,70 @@
+<!-- Friend List
+           ================================================= -->
+
+<div id="page-contents" ng-controller="chat" ng-mouseover="loadpage()">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 static">
+            </div>
+            <div class="col-md-8">
+               <!---->
+                <div class="chat-room">
+                    <div  class="row">
+                        <div class="col-md-5">
+                            <!-- Contact List in Left-->
+                            <ul class="nav nav-tabs contact-list scrollbar-wrapper scrollbar-outer">
+                                <li ng-repeat="friend in list_friend">
+                                    <a href="javascript:void(0)" ng-click="show_message(friend)">
+                                        <div class="contact">
+                                            <img src="{{friend.avata_link}}" alt="" class="profile-photo-sm pull-left"/>
+                                            <div class="msg-preview">
+                                                <h6 ng-bind="friend.username"></h6>
+                                                <p class="text-muted">Hi there, how are you</p>
+                                                <small class="text-muted">a min ago</small>
+                                                <div class="chat-alert">{{list_chat[friend.id].length}}</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--Contact List in Left End-->
+                        </div>
+                        <div class="col-md-7" ng-if="current_chat != undefined">
+                            <!--Chat Messages in Right-->
+                            <div class="tab-content scrollbar-wrapper wrapper scrollbar-outer">
+                                <div class="tab-pane active">
+                                    <div class="chat-body">
+                                        <ul class="chat-message">
+                                            <li class="left" ng-repeat="chat in current_chat">
+                                                <img src="{{chat.avt_sender}}" alt="" class="profile-photo-sm pull-left" />
+                                                <div class="chat-item">
+                                                    <div class="chat-item-header">
+                                                        <h5 ng-bind="chat.sender_name"></h5>
+                                                        <small class="text-muted">3 days ago</small>
+                                                    </div>
+                                                    <p ng-bind="chat.content"></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!--Chat Messages in Right End-->
+
+                            <div class="send-message">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Type your message">
+                                    <span class="input-group-btn">
+                                         <button class="btn btn-default" type="button" ng-click="">Send</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!---->
+            </div>
+        </div>
+    </div>
+</div>
+
